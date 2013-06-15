@@ -5,9 +5,9 @@
     },
     "extra": {
         "component": {
-            "name": "PROJECT_KEY",
+            "name": "aphorisms-api",
             "scripts": [
-                "assets/PROJECT_KEY.js",
+                "assets/aphorisms-api.js",
                 "assets/reveal.js-fullscreen-img/fullscreen-img.js"
             ],
             "styles": [

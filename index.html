@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>TITLE</title>
+    <title>Aphorisms of API Design</title>
     <link rel="stylesheet" href="components/require.css" />
     <link rel="stylesheet" href="components/revealjs/css/theme/default.css" />
     <link rel="stylesheet" href="components/revealjs/lib/css/zenburn.css" />
@@ -21,13 +21,21 @@
       .reveal pre {
         width: 100%;
       }
+
+      .drupal-marker {
+        width: 100px;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
         <section>
-          <h1>TITLE</h1>
+          <h1>Aphorisms of<br />API Design</h1>
           <p>
             <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a></small>
           </p>
@@ -44,6 +52,133 @@
           </ul>
         </section>
         <section>
+          <section>
+            <h2>Step 1:</h2>
+            <h2>Define your terms</h2>
+          </section>
+          <section>
+            <h2>API</h2>
+            <h3>Application Programming Interface</h3>
+            <p class="fragment">Code intended for other code</p>
+          </section>
+          <section>
+            <h2>Aphorism</h2>
+            <blockquote>A concise statement containing a subjective truth or observation cleverly and pithily written.</blockquote>
+            <p>&mdash; <a href="http://en.wikipedia.org/wiki/Aphorism">Wikipedia</a></p>
+          </section>
+          <section>
+            <h3>They're not rules</h3>
+            <img src="assets/captain-barbados.gif" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
+            <h3>They're more like guidelines</h3>
+          </section>
+          <section>
+            <h2>Our Agenda</h2>
+            <p>Clever and pithy sayings about good code.</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#1</h1>
+          </section>
+          <section>
+            <h2>Asimov's Law</h2>
+            <blockquote>If there are multiple universes,<br />then there are infinite universes</blockquote>
+            <p>&mdash; <em>The Gods Themselves</em></p>
+          </section>
+          <section>
+            <p>If there are multiple possible implementations,<br />there are infinite possible implementations</p>
+          </section>
+          <section>
+            <h2>So what?</h2>
+            <p>Machine names > Constants</p>
+          </section>
+          <section>
+            <pre><code class="php">
+const STATUS_PUBLISHED = 1;
+const STATUS_DRAFT = 0;
+
+function load_articles_by_status($status) {
+  // Find articles $ids for $status
+  return article_load_multiple($ids);
+}</code></pre>
+          </section>
+          <section>
+            <p>Oops</p>
+            <pre><code class="php">const MYMODULE_STATUS_PENDING = 3;
+
+const YOURMODULE_STATUS_IN_REVIEW = 3;</code></pre>
+          </section>
+          <section>
+            <pre><code class="php">
+function load_articles_by_status($status = '') {
+  // Find articles $ids for $status
+  return article_load_multiple($ids);
+}</code></pre>
+          </section>
+          <section>
+            <p>Boolean != either/or</p>
+            <p class="fragment">Booleans don't have 2 values</p>
+            <p class="fragment">Booleans are <code>TRUE</code> or not</p>
+          </section>
+          <section>
+            <p>Access is a boolean</p>
+            <p>Access control has N-possibilities</p>
+          </section>
+          <section>
+            <h3>Garfield's Law</h3>
+            <q>One is a special case of many.</q>
+            <p>&mdash; <a href="http://groups.drupal.org/node/8001">http://groups.drupal.org/node/8001</a></p>
+          </section>
+          <section>
+            <code>node_load_multiple()</code>
+            <img src="assets/druplicon.svg" alt="Druplicon" data-credit="http://drupal.org/druplicon" class="drupal-marker" />
+          </section>
+          <section>
+            <h3>Drupal 6</h3>
+            <pre><code class="php">// Fetch one node.
+function node_load($nid) {
+  $record = db_query("SELECT * FROM node WHERE nid=:nid", array(':nid' => $nid))
+    ->fetchObject();
+  $record = load_extra_stuff($record);
+  return $record;
+}
+
+// Fetch multiple nodes.
+function node_load_multiple(array $nids) {
+  $records = db_query("SELECT * from node WHERE nid IN (:nids)", ':nids' = $nids)
+    ->fetchAll();
+  foreach ($records as $record) {
+    $loaded[] = load_extra_stuff($record);
+  }
+  return $loaded;
+}</code></pre>
+          </section>
+          <section>
+            <h2>SELECT N + 1</h2>
+            <p class="fragment">(aka, melt your database)</p>
+          </section>
+          <section>
+            <h3>Drupal 7</h3>
+              <pre><code class="php">// Fetch one node.
+function node_load($nid) {
+  $nods = node_load_multiple(array($nid));
+  return reset($nodes);
+}
+
+// Fetch multiple nodes.
+function node_load_multiple(array $nids) {
+  $records = db_query("SELECT * from node WHERE nid IN (:nids)", ':nids' = $nids)
+    ->fetchAll();
+  $records = load_extra_stuff($records);
+  return $records;
+}</code></pre>
+            </section>
+          <section>
+            <h2>Aphorism #1</h2>
+            <p>N is the only number</p>
+          </section>
+        </section>
+        <section>
           <section fullscreen-img="assets/animage.png" class="fullscreen">
             <h2>TITLE</h2>
             <img src="assets/druplicon.svg" alt="Druplicon" data-credit="http://drupal.org/druplicon" style="height: 300px;" />
@@ -51,6 +186,6 @@
         </section>
       </div>
     </div>
-    <script type="text/javascript" src="components/require.js" data-main="PROJECT_KEY"></script>
+    <script type="text/javascript" src="components/require.js" data-main="aphorisms-api"></script>
   </body>
 </html>

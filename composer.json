@@ -1,0 +1,26 @@
+{
+    "require": {
+        "components/revealjs": "*",
+        "components/highlightjs": "*"
+    },
+    "extra": {
+        "component": {
+            "name": "PROJECT_KEY",
+            "scripts": [
+                "assets/PROJECT_KEY.js",
+                "assets/reveal.js-fullscreen-img/fullscreen-img.js"
+            ],
+            "styles": [
+                "assets/highlightjs-theme.css",
+                "assets/reveal.js-fullscreen-img/fullscreen-img.css"
+            ],
+            "shim": {
+                "deps": ["revealjs", "highlightjs"]
+            },
+            "files": [
+                "assets/*",
+                "components/revealjs/lib/font/**"
+            ]
+        }
+    }
+}

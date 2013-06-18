@@ -179,9 +179,320 @@ function node_load_multiple(array $nids) {
           </section>
         </section>
         <section>
-          <section fullscreen-img="assets/animage.png" class="fullscreen">
-            <h2>TITLE</h2>
-            <img src="assets/druplicon.svg" alt="Druplicon" data-credit="http://drupal.org/druplicon" style="height: 300px;" />
+          <section>
+            <h1>#2</h1>
+          </section>
+          <section>
+            <q>Fail Fast, Fail Cheap, Be Lazy.</q>
+            <p>&mdash; Rasmus Lerdorf</p>
+          </section>
+          <section>
+            <p>Make the code debug for you</p>
+          </section>
+          <section>
+            <p>Don't plan for everything that could happen</p>
+            <p class="fragment">Plan for how it will break</p>
+          </section>
+          <section>
+            <h2>Drupal 6 theme system</h2>
+            <pre><code class="php">function theme($hook) {
+  // ...
+  if (!isset($hooks[$hook])) {
+    return;
+  }
+  // ...
+  return $output;
+}</code></pre>
+          </section>
+          <section>
+            <h2>Drupal 7 theme system</h2>
+            <pre><code class="php">function theme($hook, $variables = array()) {
+  // ...
+  if (!isset($hooks[$hook])) {
+    if (!isset($candidate)) {
+      watchdog('Theme key "{$hook}" not found.');
+    }
+    return '';
+  }
+  // ...
+  return $output;
+}</code></pre>
+          </section>
+          <section>
+            <p>General failure reading Drive C:</p>
+            <p class="fragment"><code>PHP Warning:  Invalid argument supplied for foreach() in /includes/form.inc on line 2975</code></p>
+          </section>
+          <section>
+            <p>Code failure is like voting in Chicago</p>
+          </section>
+          <section>
+            <h2>Fail early, fail often</h2>
+            <p class="fragment">Constrain inputs</p>
+            <p class="fragment">Fail usefully</p>
+          </section>
+          <section>
+            <h3>Good APIs are picky</h3>
+            <pre><code class="php">class InsertQuery extends Query {
+  public function fields(array $fields,
+                         array $values = array()) {
+    // ...
+  }
+  public function preExecute() {
+    if (array_intersect($iFields, $defaultFields)) {
+      throw new FieldsOverlapException('...');
+    }
+    // ...
+    return TRUE;
+  }
+}</code></pre>
+          </section>
+          <section>
+            <blockquote>A good programmer is someone who always looks both ways before crossing a one-way street.</blockquote>
+            <p>&mdash; Doug Linder</p>
+          </section>
+          <section>
+            <p>If you're not developing under
+              <strong>E_ALL|E_STRICT</strong>,<br /><em>you're doing it wrong</em>.</p>
+          </section>
+          <section>
+            <h2>Aphorism #2</h2>
+            <p>Fail fast, fail cheap, fail usefully</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#3</h1>
+          </section>
+          <section>
+            <h2>You want to...</h2>
+            <ol>
+              <li class="fragment">Let other modules/plugins define new components</li>
+              <li class="fragment">Implement it yourself</li>
+              <li class="fragment">No undocumented APIs (Don't be Windows)</li>
+            </ol>
+          </section>
+          <section>
+            NEEDS NON-DRUPAL SAMPLES
+          </section>
+          <section>
+            <h2>Aphorism #3</h2>
+            <p>Obey your own rules</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#4</h1>
+          </section>
+          <section>
+            <p>A UI is not an API</p>
+          </section>
+          <section>
+            <p>A <em>User Interface</em> is not an <em>Application Programming Interface</em></p>
+          </section>
+          <section>
+            <p>A User is not a Program</p>
+          </section>
+          <section fullscreen-img="assets/tron.jpg" class="fullscreen">
+            &nbsp;
+          </section>
+          <section>
+            <p>A UI is a client of your API</p>
+          </section>
+          <section>
+            <p>What good is a website without a UI?</p>
+            <p class="fragment">Who said you're building a web site?</p>
+          </section>
+          <section>
+            <img src="assets/website-cilex.png" alt="Cilex, the command line micro-framework" />
+          </section>
+          <section>
+            <h2><a href="http://phpunit.de"><img src="assets/phpunit.png" width="195" height="135" alt="PHPUnit" style="background:none; border: none; vertical-align: middle;"></a> PHPUnit</h2>
+          </section>
+          <section>
+            <img src="assets/website-halbrowser.png" alt="The HAL Browser, a generic reference implementation" />
+          </section>
+          <section>
+            <img src="assets/node-add-form.png" alt="Drupal, the world's best Open Source CMS" />
+          </section>
+          <section>
+            <p>A website is not an API</p>
+          </section>
+          <section>
+            <p>A website <em>uses</em> an API</p>
+          </section>
+          <section>
+            <p>An API does not need a web site</p>
+          </section>
+          <section>
+            <p>You're not done until you have 3 implementations</p>
+          </section>
+          <section>
+            <h2>3 implementations?</h2>
+            <ol>
+              <li class="fragment">Unit test</li>
+              <li class="fragment">Web services call</li>
+              <li class="fragment">Command line</li>
+              <li class="fragment">Web site</li>
+            </ol>
+          </section>
+         <section>
+            <h2>Aphorism #4</h2>
+            <p>A UI is not an API</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#5</h1>
+          </section>
+          <section>
+            <blockquote>You know that saying about standing on the shoulders of giants?<br />
+              Drupal is standing on a huge pile of midgets.</blockquote>
+            <p>&mdash; Jeff Eaton</p>
+          </section>
+          <section>
+            <img src="assets/wheel-reinvented.jpg" alt="Don't reinvent the wheel. We have enough already." style="max-width: 80%" data-credit="http://www.flickr.com/photos/conskeptical/191048988" />
+          </section>
+          <section>
+            <p>Don't add to API bloat</p>
+          </section>
+          <section>
+            <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" data-credit="http://xkcd.com/927/" />
+          </section>
+          <section>
+            <h2>Leverage existing patterns</h2>
+            <ul>
+              <li class="fragment">Mimicry is the highest form of flattery</li>
+              <li class="fragment">Mimicry is easier to remember</li>
+              <li class="fragment">Mimicry takes less work</li>
+            </ul>
+          </section>
+          <section>
+            NEED NON-DRUPAL CODE SAMPLES
+            REFERENCE DESIGN PATTERNS?
+          </section>
+          <section>
+            <h2>Aphorism #5</h2>
+            <p>The best API is the API you didn't have to write</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#6</h1>
+          </section>
+          <section>
+            <blockquote>Use uncertainty as a driver.</blockquote>
+            <p>&mdash; Kevlin Henney, <a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></p>
+          </section>
+          <section>
+            <p>Don't make decisions if you don't have to.</p>
+            <p class="fragment">Make changing your mind cheap.</p>
+            <br /><br />
+            <p class="fragment">(Your client <em>will</em> change his mind.)</p>
+            <p class="fragment">(Twice.)</p>
+          </section>
+          <section>
+            <p>You can only change what is encapsulated.</p>
+          </section>
+          <section>
+            <h2>Logging</h2>
+            <ul>
+              <li class="fragment">Database</li>
+              <li class="fragment">Syslog</li>
+              <li class="fragment">Display on screen</li>
+              <li class="fragment">Pager / SMS message</li>
+              <li class="fragment">Twitter</li>
+            </ul>
+            <br />
+            <p class="fragment">Don't decide for me!</p>
+          </section>
+          <section>
+            <h3>Interfaces are your friend</h3>
+            <pre><code class="php">interface LogInterface {
+  public method log($message, $severity);
+}</code></pre>
+          </section>
+          <section>
+            <h3>PSR-3</h3>
+            <pre><code class="php">namespace Psr\Log;
+
+interface LoggerInterface {
+  public function log($level, $message, array $context = array());
+
+  public function emergency($message, array $context = array());
+  public function alert($message, array $context = array());
+  public function critical($message, array $context = array());
+  public function error($message, array $context = array());
+  public function warning($message, array $context = array());
+  public function notice($message, array $context = array());
+  public function info($message, array $context = array());
+  public function debug($message, array $context = array());
+}</code></pre>
+          </section>
+          <section>
+            <h3>Caching</h3>
+            <ul>
+              <li class="fragment">Database</li>
+              <li class="fragment">APC</li>
+              <li class="fragment">Memcache</li>
+              <li class="fragment">Redis</li>
+              <li class="fragment">Riak</li>
+            </ul>
+            <p class="fragment">Don't decide for me!</p>
+          </section>
+          <section>
+            <h3>In Drupal</h3>
+            <pre><code class="php">interface DrupalCacheInterface {
+  function get($cid);
+  function getMultiple(&$cids);
+  function set($cid, $data, $expire = CACHE_PERMANENT);
+  function clear($cid = NULL, $wildcard = FALSE);
+  function isEmpty();
+}</code></pre>
+          </section>
+          <section>
+            <h2>Cache PSR</h2>
+            <p>Stay tuned... ;-)</p>
+          </section>
+          <section>
+            <p>Encapsulation avoids decision making</p>
+            <p class="fragment">Avoiding decision making requires loose coupling</p>
+          </section>
+          <section>
+            <h3>Explicit interfaces</h3>
+            <pre><code class="php">namespace Psr\Log;
+
+interface LoggerInterface {
+  public function log($level, $message, array $context = array());
+
+  public function emergency($message, array $context = array());
+  public function alert($message, array $context = array());
+  public function critical($message, array $context = array());
+  public function error($message, array $context = array());
+  public function warning($message, array $context = array());
+  public function notice($message, array $context = array());
+  public function info($message, array $context = array());
+  public function debug($message, array $context = array());
+}</code></pre>
+          </section>
+          <section>
+            <h2>Separate Logic from Data</h2>
+            <div>
+              <div style="float: left;"><img src="assets/spock.jpg" alt="Logic" style="max-height: 400px;" /></div>
+              <div style="float: right;"><img src="assets/data.jpg" alt="Data"  style="max-height: 400px;" /></div>
+            </div>
+          </section>
+          <section>
+            <h2>Separation of concerns</h2>
+            <ul>
+              <li class="fragment">Interface-driven development</li>
+              <li class="fragment">Context-free (stateless) services</li>
+              <li class="fragment">Single-Responsibility Principle</li>
+              <li class="fragment">Dependency injection</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Aphorism #6</h2>
+            <p>You cannot delegate what you cannot separate</p>
           </section>
         </section>
       </div>

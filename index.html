@@ -492,8 +492,197 @@ interface LoggerInterface {
           </section>
           <section>
             <h2>Aphorism #6</h2>
-            <p>You cannot delegate what you cannot separate</p>
+            <p>Avoid making decisions</p>
           </section>
+        </section>
+        <section>
+          <section>
+            <h1>#7</h1>
+          </section>
+          <section>
+            <p>Delegation adds indirection</p>
+            <p class="fragment">Indirection requires abstraction</p>
+            <p class="fragment">Abstraction <del>solves</del> hides complexity</p>
+          </section>
+          <section>
+            <p>Abstraction is not free</p>
+          </section>
+          <section>
+            <h2>Performance</h2>
+            <ul>
+              <li class="fragment">
+                <a href="http://www.garfieldtech.com/blog/magic-benchmarks">Language level</a>
+                <ul class="fragment">
+                  <li>call_user_func_array() = 3 functions</li>
+                  <li>__call() = 3 methods</li>
+                </ul>
+              </li>
+              <li class="fragment">
+                <a href="http://drupal.org/node/1067802">Query builders</a> in Drupal
+                <ul>
+                  <li class="fragment">Query builder is 30% slower than raw queries</li>
+                  <li class="fragment">(Drupal's query builder is really simple, too...)</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <p>What the heck is going on under the hood?</p>
+            <br />
+            <p style="text-align: right;" class="fragment">... 14 method calls later I still don't know.</p>
+          </section>
+          <section>
+            <blockquote>There are two ways of constructing a software design:
+              One way is to make it so simple that there are obviously no
+              deficiencies, and the other way is to make it so complicated that
+              there are no obvious deficiencies.</blockquote>
+            <p>&mdash; C. A. R. Hoare</p>
+          </section>
+          <section>
+            <blockquote>The unavoidable price of reliability is simplicity.</blockquote>
+            <p>&mdash; C. A. R. Hoare</p>
+          </section>
+          <section>
+            <h2>Aphorism #7</h2>
+            <p>There is no problem that cannot be solved by adding<br />another layer of abstraction...</p>
+            <p class="fragment">except abstraction</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>#8</h1>
+          </section>
+          <section>
+            <p><del>Drupal</del>Your software has idiosyncrasies, but it's not special.</p>
+          </section>
+          <section>
+            <p>No one understands Drupalisms,<br /> except Drupal developers</p>
+            <p class="fragment">(And not even all of them)</p>
+          </section>
+          <section>
+            <p>No one understands Symfonyisms,<br /> except Symfony developers</p>
+            <p class="fragment">(And not even all of them)</p>
+          </section>
+          <section>
+            <p>No one understands PHPisms,<br /> except PHP developers</p>
+            <p class="fragment">(And not even all of them)</p>
+          </section>
+          <section>
+            <p>No one understands your system,<br /> except you</p>
+            <p class="fragment">(And sometimes not even then)</p>
+          </section>
+          <section>
+            <img src="assets/chx-resig.jpg" alt="Karoly Negyesi and John Resig" />
+            <p class="fragment">No matter how cool you are,<br />John Resig knows more Javascript than you do.</p>
+          </section>
+          <section>
+            <h2>Some numbers</h2>
+            <ul>
+              <li class="fragment">Age of 3rd gen languages: 56 years</li>
+              <li class="fragment">Age of PHP: 18 years</li>
+              <li class="fragment">Age of Drupal: 12 years</li>
+              <li class="fragment">Age of your website: 6 months</li>
+            </ul>
+            <p style="margin-top: 2em;" class="fragment">Odds of you doing something original...?</p>
+          </section>
+          <section>
+            <h2>Find existing wheels</h2>
+            <ul>
+              <li class="fragment">Composer / <a href="http://www.packgist.org/">Packgist.org</a></li>
+              <li class="fragment"><a href="http://www.symfony.com/">Symfony2 Components</a></li>
+              <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2>Use existing platforms</h2>
+            <ul>
+              <li class="fragment"><a href="http://www.symfony.com/">Symfony2</a></li>
+              <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
+              <li class="fragment"><a href="http://cakephp.org/">CakePHP</a></li>
+              <li class="fragment"><a href="http://drupal.org/">Drupal</a></li>
+              <li class="fragment">Do not insert your from-scratch system here</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Use existing standards</h2>
+            <ul>
+              <li class="fragment"><a href="http://www.php-fig.org/">PHP-FIG</a> Specifications</li>
+              <li class="fragment">Learn your HTTP!</li>
+              <li class="fragment">REST API: <q class="fragment">I can go home and rest and not design from scratch</q></li>
+            </ul>
+          </section>
+          <section>
+            <h2>Learn from existing wheels</h2>
+            <ul>
+              <li class="fragment">PECL</li>
+              <li class="fragment">jQuery</li>
+              <li class="fragment">Wordpress(!)</li>
+              <li class="fragment">Symfony2, Zend Framework, etc.</li>
+              <li class="fragment">Java</li>
+              <li class="fragment">Design patterns</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Drupal 8</h2>
+            <ul>
+              <li class="fragment">Symfony2 <small>(HttpFoundation, HttpKernel, DependencyInjection, EventDispatcher, Routing, Serializer, Validator, Yaml)</small></li>
+              <li class="fragment">Symfony CMF</li>
+              <li class="fragment">Zend Feed</li>
+              <li class="fragment">Doctrine Annotations</li>
+              <li class="fragment">Guzzle</li>
+              <li class="fragment">EasyRDF</li>
+              <li class="fragment">Assetic</li>
+              <li class="fragment">Twig</li>
+            </ul>
+          </section>
+          <section>
+            <p>Feature no software needs</p>
+            <br />
+            <h1 class="fragment">Ego</h1>
+          </section>
+          <section>
+            <h2>Durden's Law</h2>
+            <img src="assets/tyler-durden.jpg" alt="Tyler Durden, Philosopher" data-credit="http://manvsdebt.com/tyler-durdens-guide-to-personal-finance/" />
+          </section>
+          <section>
+            <h2>Aphorism #8</h2>
+            <p>You are not a special and unique snowflake</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Grand Unified Theory of API design</h3>
+          </section>
+          <section>
+            <blockquote>Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.</blockquote>
+            <p>&mdash; Martin Golding</p>
+          </section>
+          <section>
+            <p>You will always know where you live.</p>
+          </section>
+          <section>
+            <p>In six months, some one will need to do something you never thought of with your code and will not be able to edit it.</p>
+          </section>
+          <section>
+            <p>That will be you.</p>
+            <p class="fragment" style="margin-top: 2em;">Plan accordingly.</p>
+          </section>
+        </section>
+        <section>
+          <h2>Further reading</h2>
+          <ul>
+            <li><em><a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></em>, by Richard Monson-Haefel</li>
+            <li><a href="http://TheDailyWTF.com/">http://TheDailyWTF.com/</a></li>
+            <li><me>Design Patterns: Elements of Reusable Object-Oriented Software</em>, by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</li>
+            <li><a href="http://www.SoftwareQuotes.com/">http://www.SoftwareQuotes.com/</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Stalk me!</h2>
+          <p><a href="http://www.palantir.net/">http://www.palantir.net/</a></p>
+          <p><a href="http://www.garfieldtech.com/">http://www.garfieldtech.com/</a></p>
+          <p><a href="http://twitter.com/Crell">@Crell</a></p>
+          <h3 style="margin-top: 1em;">Thanks!</h3>
         </section>
       </div>
     </div>

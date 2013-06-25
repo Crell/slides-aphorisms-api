@@ -75,6 +75,10 @@
             <h2>Our Agenda</h2>
             <p>Clever and pithy sayings about good code.</p>
           </section>
+          <section>
+            <blockquote>Learn the rules like a pro so you can break them like an artist.</blockquote>
+            <p>&mdash; Pablo Picasso</p>
+          </section>
         </section>
         <section>
           <section>
@@ -137,15 +141,15 @@ function load_articles_by_status($status = '') {
             <h3>Drupal 6</h3>
             <pre><code class="php">// Fetch one node.
 function node_load($nid) {
-  $record = db_query("SELECT * FROM node WHERE nid=:nid", array(':nid' => $nid))
+  $record = db_query("SELECT * FROM node WHERE nid=:nid", [':nid' => $nid])
     ->fetchObject();
   $record = load_extra_stuff($record);
   return $record;
-}
+}</code></pre>
 
-// Fetch multiple nodes.
+<pre class="fragment"><code class="php">// Fetch multiple nodes.
 function node_load_multiple(array $nids) {
-  $records = db_query("SELECT * from node WHERE nid IN (:nids)", ':nids' = $nids)
+  $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
     ->fetchAll();
   foreach ($records as $record) {
     $loaded[] = load_extra_stuff($record);
@@ -167,7 +171,7 @@ function node_load($nid) {
 
 // Fetch multiple nodes.
 function node_load_multiple(array $nids) {
-  $records = db_query("SELECT * from node WHERE nid IN (:nids)", ':nids' = $nids)
+  $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
     ->fetchAll();
   $records = load_extra_stuff($records);
   return $records;
@@ -233,8 +237,7 @@ function node_load_multiple(array $nids) {
           <section>
             <h3>Good APIs are picky</h3>
             <pre><code class="php">class InsertQuery extends Query {
-  public function fields(array $fields,
-                         array $values = array()) {
+  public function fields(array $fields, array $values = []) {
     // ...
   }
   public function preExecute() {
@@ -292,8 +295,8 @@ function node_load_multiple(array $nids) {
           <section>
             <p>A User is not a Program</p>
           </section>
-          <section fullscreen-img="assets/tron.jpg" class="fullscreen">
-            &nbsp;
+          <section>
+            <img src="assets/tron.jpg" style="width: 80%" />
           </section>
           <section>
             <p>A UI is a client of your API</p>
@@ -307,6 +310,7 @@ function node_load_multiple(array $nids) {
           </section>
           <section>
             <h2><a href="http://phpunit.de"><img src="assets/phpunit.png" width="195" height="135" alt="PHPUnit" style="background:none; border: none; vertical-align: middle;"></a> PHPUnit</h2>
+            <p class="fragment">(Tests or it didn't happen)</p>
           </section>
           <section>
             <img src="assets/website-halbrowser.png" alt="The HAL Browser, a generic reference implementation" />
@@ -316,15 +320,11 @@ function node_load_multiple(array $nids) {
           </section>
           <section>
             <p>A website is not an API</p>
+            <p class="fragment" style="margin-top: 1em;">A website <em>uses</em> an API</p>
+            <p class="fragment" style="margin-top: 1em;">An API does not need a web site</p>
           </section>
           <section>
-            <p>A website <em>uses</em> an API</p>
-          </section>
-          <section>
-            <p>An API does not need a web site</p>
-          </section>
-          <section>
-            <p>You're not done until you have 3 implementations</p>
+            <blockquote>You're not done until you have 3 implementations</blockquote>
           </section>
           <section>
             <h2>3 implementations?</h2>
@@ -402,8 +402,7 @@ function node_load_multiple(array $nids) {
               <li class="fragment">Pager / SMS message</li>
               <li class="fragment">Twitter</li>
             </ul>
-            <br />
-            <p class="fragment">Don't decide for me!</p>
+            <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
           </section>
           <section>
             <h3>Interfaces are your friend</h3>
@@ -437,7 +436,7 @@ interface LoggerInterface {
               <li class="fragment">Redis</li>
               <li class="fragment">Riak</li>
             </ul>
-            <p class="fragment">Don't decide for me!</p>
+            <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
           </section>
           <section>
             <h3>In Drupal</h3>
@@ -673,7 +672,7 @@ interface LoggerInterface {
           <ul>
             <li><em><a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></em>, by Richard Monson-Haefel</li>
             <li><a href="http://TheDailyWTF.com/">http://TheDailyWTF.com/</a></li>
-            <li><me>Design Patterns: Elements of Reusable Object-Oriented Software</em>, by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</li>
+            <li><em>Design Patterns: Elements of Reusable Object-Oriented Software</em>, by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</li>
             <li><a href="http://www.SoftwareQuotes.com/">http://www.SoftwareQuotes.com/</a></li>
           </ul>
         </section>

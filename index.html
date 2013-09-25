@@ -187,7 +187,7 @@ function node_load_multiple(array $nids) {
             <h3>Drupal 7</h3>
               <pre><code class="php">// Fetch one node.
 function node_load($nid) {
-  $nods = node_load_multiple(array($nid));
+  $nodes = node_load_multiple(array($nid));
   return reset($nodes);
 }
 

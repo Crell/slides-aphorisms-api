@@ -1,120 +1,132 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
+  <title>Aphorisms of API Design</title>
+  <meta name="author" content="Larry Garfield">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="platform-reveal/platform-theme/assets/css/styles.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'platform-theme/assets/css/print/pdf.css' : 'platform-theme/assets/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
 
-    <title>Aphorisms of API Design</title>
+  <script src="platform-reveal/countup.js"></script>
+  <script src="platform-reveal/classer.js"></script>
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <style type="text/css">
+    .top-align {
+      position: absolute;
+      top: -6em;
+    }
+    h1.inverse,
+    h2.inverse,
+    h3.inverse,
+    h4.inverse,
+    p.inverse {
+      color: #000;
+    }
+    .reveal pre {
+      width: 100%;
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    .drupal-marker {
+      width: 100px;
+      position: absolute;
+      right: 50px;
+      bottom: 50px;
+      display: none;
+    }
+  </style>
 
-    <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+</head>
+<!-- Change body class to "dark" if you prefer a dark theme, or "light" if you'd rather have a light theme-->
+<body class="light">
+<div class="reveal">
+  <div class="logo">
+    <p>Platform.sh</p>
+  </div>
+  <!-- Any section element inside of this container is displayed as a slide -->
+  <div class="slides">
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <section>
+      <h1>Aphorisms of API Design</h1>
+      <p>
+        <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a> (<a href="http://twitter.com/Crell">@Crell</a>)</small>
+      </p>
+    </section>
+    <section class="l-2up">
+      <h2><a href="http://twitter.com/Crell">@Crell</a></h2>
+      <div>
+        <img src="assets/larry-olaf-hug.jpg" alt="Larry implements Huggable" style="width: 350px; margin: 0" />
+      </div>
+      <div>
+        <ul style="text-wrap: none">
+          <li>Director of Runtimes and Integrations, <a href="http://www.platform.sh/">Platform.sh</a></li>
+          <li style="margin-top: 1em;">Drupal 8 Web Services Lead</li>
+          <li style="margin-top: 1em;">Drupal Representative, <a href="http://www.php-fig.org/">PHP-FIG</a></li>
+          <li style="margin-top: 1em;"><code>implements Huggable</code></li>
+        </ul>
+      </div>
+    </section>
 
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-    <script>
-            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-    </script>
 
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
-    <style>
-      .top-align {
-        position: absolute;
-        top: -6em;
-      }
-      h1.inverse,
-      h2.inverse,
-      h3.inverse,
-      h4.inverse,
-      p.inverse {
-        color: #000;
-      }
-      .reveal pre {
-        width: 100%;
-      }
-
-      .drupal-marker {
-        width: 100px;
-        position: absolute;
-        right: 50px;
-        bottom: 50px;
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h1>Aphorisms of<br />API Design</h1>
-          <p>
-            <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a></small>
-          </p>
-        </section>
-        <section>
-          <h2><a href="http://twitter.com/Crell">@Crell</a></h2>
-          <img src="assets/palantirnet-logo-2013.svg" alt="Palantir.net Pays me!" style="width: 300px; background: #FFF; float: right;" />
-          <ul>
-            <li>Senior Architect, <a href="http://www.palantir.net/">Palantir.net</a></li>
-            <li>Drupal 8 Web Services Lead</li>
-            <li>Drupal Representative, <a href="http://www.php-fig.org/">PHP-FIG</a></li>
-            <li>Advisor, Drupal Association</li>
-            <li>General busybody</li>
-          </ul>
-        </section>
-        <section>
-          <section>
-            <h2>Step 1:</h2>
-            <h2>Define your terms</h2>
-          </section>
-          <section>
-            <h2>API</h2>
-            <h3>Application Programming Interface</h3>
-            <p class="fragment">Code intended for other code</p>
-          </section>
-          <section>
-            <h2>Aphorism</h2>
-            <blockquote>A concise statement containing a subjective truth or observation cleverly and pithily written.</blockquote>
-            <p>&mdash; <a href="http://en.wikipedia.org/wiki/Aphorism">Wikipedia</a></p>
-          </section>
-          <section>
-            <h3>They're not rules</h3>
-            <img src="assets/captain-barbados.gif" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
-            <h3>They're more like guidelines</h3>
-          </section>
-          <section>
-            <h2>Our Agenda</h2>
-            <p>Clever and pithy sayings about good code.</p>
-          </section>
-          <section>
-            <blockquote>Learn the rules like a pro<br />so you can break them like an artist.</blockquote>
-            <p>&mdash; Pablo Picasso</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#1</h1>
-          </section>
-          <section>
-            <h2>Asimov's Law</h2>
-            <blockquote>If there are multiple universes,<br />then there are infinite universes</blockquote>
-            <p>&mdash; <em>The Gods Themselves</em></p>
-          </section>
-          <section>
-            <p>If there are multiple possible implementations,<br />there are infinite possible implementations</p>
-          </section>
-          <section>
-            <h2>So what?</h2>
-            <p>Machine names > Constants</p>
-          </section>
-          <section>
+    <section>
+      <section>
+        <h2>Step 1:</h2>
+        <h2>Define your terms</h2>
+      </section>
+      <section>
+        <h2>API</h2>
+        <h3>Application Programming Interface</h3>
+        <p class="fragment">Code intended for other code</p>
+      </section>
+      <section>
+        <h2>Aphorism</h2>
+        <blockquote>A concise statement containing a subjective truth or observation cleverly and pithily written.</blockquote>
+        <p>&mdash; <a href="http://en.wikipedia.org/wiki/Aphorism">Wikipedia</a></p>
+      </section>
+      <section>
+        <h3>They're not rules</h3>
+        <img src="assets/captain-barbados.gif" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
+        <h3>They're more like guidelines</h3>
+      </section>
+      <section>
+        <h2>Our Agenda</h2>
+        <p>Clever and pithy sayings about good code.</p>
+      </section>
+      <section>
+        <blockquote>Learn the rules like a pro<br />so you can break them like an artist.</blockquote>
+        <p>&mdash; Pablo Picasso</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#1</h1>
+      </section>
+      <section>
+        <h2>Asimov's Law</h2>
+        <blockquote>If there are multiple universes,<br />then there are infinite universes</blockquote>
+        <p>&mdash; <em>The Gods Themselves</em></p>
+      </section>
+      <section>
+        <p>If there are multiple possible implementations,<br />there are infinite possible implementations</p>
+      </section>
+      <section>
+        <h2>So what?</h2>
+        <p>Machine names > Constants</p>
+      </section>
+      <section>
             <pre><code class="php">
 const STATUS_PUBLISHED = 1;
 const STATUS_DRAFT = 0;
@@ -123,42 +135,42 @@ function load_articles_by_status($status) {
   // Find articles $ids for $status
   return article_load_multiple($ids);
 }</code></pre>
-          </section>
-          <section>
-            <p>Oops</p>
-            <pre><code class="php">const MYMODULE_STATUS_PENDING = 3;
+      </section>
+      <section>
+        <p>Oops</p>
+        <pre><code class="php">const MYMODULE_STATUS_PENDING = 3;
 
 const YOURMODULE_STATUS_IN_REVIEW = 3;</code></pre>
-          </section>
-          <section>
+      </section>
+      <section>
             <pre><code class="php">
 function load_articles_by_status($status = '') {
   // Find articles $ids for $status
   return article_load_multiple($ids);
 }</code></pre>
-          </section>
-          <section>
-            <h3>But aren't booleans 2-state?</h3>
-            <p class="fragment">Boolean != either/or</p>
-            <p class="fragment">Booleans don't have 2 values</p>
-            <p class="fragment">Booleans are <code>TRUE</code> or not</p>
-          </section>
-          <section>
-            <p>Access is a boolean</p>
-            <p>Access control has N-possibilities</p>
-          </section>
-          <section>
-            <h3>Garfield's Law</h3>
-            <q>One is a special case of many.</q>
-            <p>&mdash; <a href="http://groups.drupal.org/node/8001">http://groups.drupal.org/node/8001</a></p>
-          </section>
-          <section>
-            <code>node_load_multiple()</code>
-            <img src="assets/druplicon.svg" alt="Druplicon" data-credit="http://drupal.org/druplicon" class="drupal-marker" />
-          </section>
-          <section>
-            <h3>Drupal 6</h3>
-            <pre><code class="php">// Fetch one node.
+      </section>
+      <section>
+        <h3>But aren't booleans 2-state?</h3>
+        <p class="fragment">Boolean != either/or</p>
+        <p class="fragment">Booleans don't have 2 values</p>
+        <p class="fragment">Booleans are <code>TRUE</code> or not</p>
+      </section>
+      <section>
+        <p>Access is a boolean</p>
+        <p>Access control has N-possibilities</p>
+      </section>
+      <section>
+        <h3>Garfield's Law</h3>
+        <q>One is a special case of many.</q>
+        <p>&mdash; <a href="http://groups.drupal.org/node/8001">http://groups.drupal.org/node/8001</a></p>
+      </section>
+      <section>
+        <code>node_load_multiple()</code>
+        <img src="assets/druplicon.svg" alt="Druplicon" data-credit="http://drupal.org/druplicon" class="drupal-marker" />
+      </section>
+      <section>
+        <h3>Drupal 6</h3>
+        <pre><code class="php">// Fetch one node.
 function node_load($nid) {
   $record = db_query("SELECT * FROM node WHERE nid=:nid", [':nid' => $nid])
     ->fetchObject();
@@ -166,7 +178,7 @@ function node_load($nid) {
   return $record;
 }</code></pre>
 
-<pre class="fragment"><code class="php">// Fetch multiple nodes.
+        <pre class="fragment"><code class="php">// Fetch multiple nodes.
 function node_load_multiple(array $nids) {
   $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
     ->fetchAll();
@@ -175,14 +187,14 @@ function node_load_multiple(array $nids) {
   }
   return $loaded;
 }</code></pre>
-          </section>
-          <section>
-            <h2>SELECT N + 1</h2>
-            <p class="fragment">(aka, melt your database)</p>
-          </section>
-          <section>
-            <h3>Drupal 7</h3>
-              <pre><code class="php">// Fetch one node.
+      </section>
+      <section>
+        <h2>SELECT N + 1</h2>
+        <p class="fragment">(aka, melt your database)</p>
+      </section>
+      <section>
+        <h3>Drupal 7</h3>
+        <pre><code class="php">// Fetch one node.
 function node_load($nid) {
   $nodes = node_load_multiple(array($nid));
   return reset($nodes);
@@ -195,30 +207,30 @@ function node_load_multiple(array $nids) {
   $records = load_extra_stuff($records);
   return $records;
 }</code></pre>
-            </section>
-          <section>
-            <h2>Aphorism #1</h2>
-            <p>N is the only number</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#2</h1>
-          </section>
-          <section>
-            <q>Fail Fast, Fail Cheap, Be Lazy.</q>
-            <p>&mdash; Rasmus Lerdorf</p>
-          </section>
-          <section>
-            <p>Make the code debug for you</p>
-          </section>
-          <section>
-            <p>Don't plan for everything that could happen</p>
-            <p class="fragment">Plan for how it will break</p>
-          </section>
-          <section>
-            <h2>Drupal 6 theme system</h2>
-            <pre><code class="php">function theme($hook) {
+      </section>
+      <section>
+        <h2>Aphorism #1</h2>
+        <p>N is the only number</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#2</h1>
+      </section>
+      <section>
+        <q>Fail Fast, Fail Cheap, Be Lazy.</q>
+        <p>&mdash; Rasmus Lerdorf</p>
+      </section>
+      <section>
+        <p>Make the code debug for you</p>
+      </section>
+      <section>
+        <p>Don't plan for everything that could happen</p>
+        <p class="fragment">Plan for how it will break</p>
+      </section>
+      <section>
+        <h2>Drupal 6 theme system</h2>
+        <pre><code class="php">function theme($hook) {
   // ...
   if (!isset($hooks[$hook])) {
     return;
@@ -226,10 +238,10 @@ function node_load_multiple(array $nids) {
   // ...
   return $output;
 }</code></pre>
-          </section>
-          <section>
-            <h2>Drupal 7 theme system</h2>
-            <pre><code class="php">function theme($hook, $variables = array()) {
+      </section>
+      <section>
+        <h2>Drupal 7 theme system</h2>
+        <pre><code class="php">function theme($hook, $variables = array()) {
   // ...
   if (!isset($hooks[$hook])) {
     if (!isset($candidate)) {
@@ -240,22 +252,22 @@ function node_load_multiple(array $nids) {
   // ...
   return $output;
 }</code></pre>
-          </section>
-          <section>
-            <p>General failure reading Drive C:</p>
-            <p class="fragment"><code>PHP Warning:  Invalid argument supplied for foreach() in /includes/form.inc on line 2975</code></p>
-          </section>
-          <section>
-            <p>Code failure is like voting in Chicago</p>
-          </section>
-          <section>
-            <h2>Fail early, fail often</h2>
-            <p class="fragment">Constrain inputs</p>
-            <p class="fragment">Fail usefully</p>
-          </section>
-          <section>
-            <h3>Good APIs are picky</h3>
-            <pre><code class="php">class InsertQuery extends Query {
+      </section>
+      <section>
+        <p>General failure reading Drive C:</p>
+        <p class="fragment"><code>PHP Warning:  Invalid argument supplied for foreach() in /includes/form.inc on line 2975</code></p>
+      </section>
+      <section>
+        <p>Code failure is like voting in Chicago</p>
+      </section>
+      <section>
+        <h2>Fail early, fail often</h2>
+        <p class="fragment">Constrain inputs</p>
+        <p class="fragment">Fail usefully</p>
+      </section>
+      <section>
+        <h3>Good APIs are picky</h3>
+        <pre><code class="php">class InsertQuery extends Query {
   public function fields(array $fields, array $values = []) {
     // ...
   }
@@ -267,33 +279,33 @@ function node_load_multiple(array $nids) {
     return TRUE;
   }
 }</code></pre>
-          </section>
-          <section>
-            <blockquote>A good programmer is someone who always looks both ways before crossing a one-way street.</blockquote>
-            <p>&mdash; Doug Linder</p>
-          </section>
-          <section>
-            <p>If you're not developing under
-              <strong>E_ALL|E_STRICT</strong>,<br /><em>you're doing it wrong</em>.</p>
-          </section>
-          <section>
-            <h2>Aphorism #2</h2>
-            <p>Fail fast, fail cheap, fail usefully</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#3</h1>
-          </section>
-          <section>
-            <p>You can't teach what you don't know.</p>
-            <p class="fragment" style="margin-top: 1em;">You don't know what you can't teach.</p>
-          </section>
-          <section>
-            <p>You don't understand what you can't document.</p>
-            <p class="fragment" style="margin-top: 1em;"><em>I</em> can't understand what you don't document.</p>
-          </section>
-          <section>
+      </section>
+      <section>
+        <blockquote>A good programmer is someone who always looks both ways before crossing a one-way street.</blockquote>
+        <p>&mdash; Doug Linder</p>
+      </section>
+      <section>
+        <p>If you're not developing under
+          <strong>E_ALL|E_STRICT</strong>,<br /><em>you're doing it wrong</em>.</p>
+      </section>
+      <section>
+        <h2>Aphorism #2</h2>
+        <p>Fail fast, fail cheap, fail usefully</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#3</h1>
+      </section>
+      <section>
+        <p>You can't teach what you don't know.</p>
+        <p class="fragment" style="margin-top: 1em;">You don't know what you can't teach.</p>
+      </section>
+      <section>
+        <p>You don't understand what you can't document.</p>
+        <p class="fragment" style="margin-top: 1em;"><em>I</em> can't understand what you don't document.</p>
+      </section>
+      <section>
             <pre><code class="php">abstract class FileTransferFTP extends FileTransfer {
    /**
     * Return an object which can implement the FTP protocol.
@@ -306,55 +318,55 @@ function node_load_multiple(array $nids) {
     */
    static function factory($jail, $settings) { }
 }</code></pre>
-          </section>
-          <section>
-            <h3>Date.module</h3>
-            <pre><code class="php">/**
+      </section>
+      <section>
+        <h3>Date.module</h3>
+        <pre><code class="php">/**
  * Getter callback to return date values as datestamp in UTC from the field.
  */
 function date_entity_metadata_field_getter($object, array $options,
                                            $name, $obj_type, &$context) { }</code></pre>
-            <p class="fragment" style="margin-top: 1em;">No, seriously, WTF?</p>
-          </section>
-          <section>
-            <h2>Lack of comments indicate</h2>
-            <ul>
-              <li class="fragment">Laziness</li>
-              <li class="fragment">Indifference</li>
-              <li class="fragment">Lack of comprehension</li>
-              <li class="fragment">Embarrassment</li>
-            </ul>
-          </section>
-          <section>
-            <h2>What to document</h2>
-            <ul>
-              <li class="fragment"><em>Every</em> function</li>
-              <li class="fragment"><em>Every</em> method</li>
-              <li class="fragment"><em>Every</em> class</li>
-              <li class="fragment"><em>Every</em> object property</li>
-              <li class="fragment"><em>Every</em> constant</li>
-              <li class="fragment"><em>Every</em> parameter</li>
-              <li class="fragment"><em>Every</em> return value</li>
-            </ul>
-            <p class="fragment" style="margin-top: 1em;"><em>No</em> exceptions <span class="fragment">(Well, document those, too)</span></p>
-          </section>
-          <section>
-            <h2>Usage docs</h2>
-            <p class="fragment">A picture is worth 1000 words</p>
-            <p class="fragment">A code sample is worth 1000 comments</p>
-            <div class="fragment">
-              <img src="assets/gearman-site.png" style="width: 70%" alt="Gearman's documentation provides both" />
-              <p>You wish you were as cool as Gearman's docs</p>
-            </div>
-          </section>
-          <section>
-            <h1>&lt;aside&gt;</h1>
-          </section>
-          <section>
-            <q>Clearly written code with well-named methods is self-documenting.</q>
-            <img class="fragment" src="assets/bullshit-corner.jpg" alt="Um, no." data-credit="http://www.flickr.com/photos/ilgiovanewalter/3907286916/" />
-          </section>
-          <section>
+        <p class="fragment" style="margin-top: 1em;">No, seriously, WTF?</p>
+      </section>
+      <section>
+        <h2>Lack of comments indicate</h2>
+        <ul>
+          <li class="fragment">Laziness</li>
+          <li class="fragment">Indifference</li>
+          <li class="fragment">Lack of comprehension</li>
+          <li class="fragment">Embarrassment</li>
+        </ul>
+      </section>
+      <section>
+        <h2>What to document</h2>
+        <ul>
+          <li class="fragment"><em>Every</em> function</li>
+          <li class="fragment"><em>Every</em> method</li>
+          <li class="fragment"><em>Every</em> class</li>
+          <li class="fragment"><em>Every</em> object property</li>
+          <li class="fragment"><em>Every</em> constant</li>
+          <li class="fragment"><em>Every</em> parameter</li>
+          <li class="fragment"><em>Every</em> return value</li>
+        </ul>
+        <p class="fragment" style="margin-top: 1em;"><em>No</em> exceptions <span class="fragment">(Well, document those, too)</span></p>
+      </section>
+      <section>
+        <h2>Usage docs</h2>
+        <p class="fragment">A picture is worth 1000 words</p>
+        <p class="fragment">A code sample is worth 1000 comments</p>
+        <div class="fragment">
+          <img src="assets/gearman-site.png" style="width: 70%" alt="Gearman's documentation provides both" />
+          <p>You wish you were as cool as Gearman's docs</p>
+        </div>
+      </section>
+      <section>
+        <h1>&lt;aside&gt;</h1>
+      </section>
+      <section>
+        <q>Clearly written code with well-named methods is self-documenting.</q>
+        <img class="fragment" src="assets/bullshit-corner.jpg" alt="Um, no." data-credit="http://www.flickr.com/photos/ilgiovanewalter/3907286916/" />
+      </section>
+      <section>
             <pre><code class="php">protected function normalizeCharset($value) {
     switch (mb_detect_encoding($value)) {
     case 'ASCII':
@@ -372,22 +384,22 @@ function date_entity_metadata_field_getter($object, array $options,
   }
   return $value;
 }</code></pre>
-            <p class="fragment">WTF is up with UTF-8? And why is FALSE Windows-1252?</p>
-          </section>
-          <section>
+        <p class="fragment">WTF is up with UTF-8? And why is FALSE Windows-1252?</p>
+      </section>
+      <section>
             <pre><code class="php">protected function normalizeCharset($value) {
   // mb_detect_encoding() in most situations supports only two character sets,
   // ASCII and UTF-8.  However, it is sadly not unusual for incoming data
   // to be in Windows-1252, aka MS Word. We therefore guess that a
-  // false/not-found character set is Windows-1251, and try to convert that
+  // false/not-found character set is Windows-1252, and try to convert that
   // to UTF-8.
   // Note: The odds of this breaking on some other character encoding besides
   // those three is rather high.
 
   // ...
 }</code></pre>
-          </section>
-          <section>
+      </section>
+      <section>
 <pre><code class="php">switch (mb_detect_encoding($value)) {
   // I have absolutely no idea why UTF-8 strings need to be converted
   // from UTF-8 to UTF-8, but if this code is removed many strings end up
@@ -405,8 +417,8 @@ function date_entity_metadata_field_getter($object, array $options,
     $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
     break;
 </code></pre>
-          </section>
-          <section>
+      </section>
+      <section>
 <pre><code class="php">
   // ...
 
@@ -421,155 +433,155 @@ function date_entity_metadata_field_getter($object, array $options,
     $this->log->warn("Detected Windows-1252 character encoding.");
     break;
 }</code></pre>
-          </section>
-          <section>
-            <h1>&lt;/aside&gt;</h1>
-          </section>
-          <section>
-            <h2>Aphorism #3</h2>
-            <p>Docs or it didn't happen</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#4</h1>
-          </section>
-          <section>
-            <p>A UI is not an API</p>
-          </section>
-          <section>
-            <p>A <em>User Interface</em> is not an <em>Application Programming Interface</em></p>
-          </section>
-          <section>
-            <p>A User is not a Program</p>
-          </section>
-          <section>
-            <img src="assets/tron.jpg" style="width: 80%" />
-          </section>
-          <section>
-            <p>A UI is a client of your API</p>
-          </section>
-          <section>
-            <p>What good is a website without a UI?</p>
-            <p class="fragment">Who said you're building a web site?</p>
-          </section>
-          <section>
-            <img src="assets/website-cilex.png" alt="Cilex, PHP command line micro-framework" />
-          </section>
-          <section>
-            <h2><a href="http://phpunit.de"><img src="assets/phpunit.png" width="195" height="135" alt="PHPUnit" style="background:none; border: none; vertical-align: middle;"></a> PHPUnit</h2>
-            <p class="fragment">(Tests or it didn't happen)</p>
-          </section>
-          <section>
-            <img src="assets/website-halbrowser.png" alt="The HAL Browser, a generic reference implementation" />
-          </section>
-          <section>
-            <img src="assets/node-add-form.png" alt="Drupal, the world's best Open Source CMS" />
-          </section>
-          <section>
-            <p>A website is not an API</p>
-            <p class="fragment" style="margin-top: 1em;">A website <em>uses</em> an API</p>
-            <p class="fragment" style="margin-top: 1em;">An API does not need a web site</p>
-          </section>
-          <section>
-            <blockquote>You're not done until you have<br />three implementations</blockquote>
-          </section>
-          <section>
-            <h2>3 implementations?</h2>
-            <ol>
-              <li class="fragment">Unit test</li>
-              <li class="fragment">Web services call</li>
-              <li class="fragment">Command line</li>
-              <li class="fragment">Web site</li>
-            </ol>
-          </section>
-         <section>
-            <h2>Aphorism #4</h2>
-            <p>A UI is not an API</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#5</h1>
-          </section>
-          <section>
-            <blockquote>You know that saying about standing on the shoulders of giants?<br />
-              Drupal is standing on a huge pile of midgets.</blockquote>
-            <p>&mdash; Jeff Eaton</p>
-          </section>
-          <section>
-            <img src="assets/wheel-reinvented.jpg" alt="Don't reinvent the wheel. We have enough already." style="max-width: 80%" data-credit="http://www.flickr.com/photos/conskeptical/191048988" />
-          </section>
-          <section>
-            <p>Don't add to API bloat</p>
-          </section>
-          <section>
-            <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" data-credit="http://xkcd.com/927/" />
-          </section>
-          <section>
-            <h2>Leverage existing patterns</h2>
+      </section>
+      <section>
+        <h1>&lt;/aside&gt;</h1>
+      </section>
+      <section>
+        <h2>Aphorism #3</h2>
+        <p>Docs or it didn't happen</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#4</h1>
+      </section>
+      <section>
+        <p>A UI is not an API</p>
+      </section>
+      <section>
+        <p>A <em>User Interface</em> is not an <em>Application Programming Interface</em></p>
+      </section>
+      <section>
+        <p>A User is not a Program</p>
+      </section>
+      <section>
+        <img src="assets/tron.jpg" style="width: 80%" />
+      </section>
+      <section>
+        <p>A UI is a client of your API</p>
+      </section>
+      <section>
+        <p>What good is a website without a UI?</p>
+        <p class="fragment">Who said you're building a web site?</p>
+      </section>
+      <section>
+        <img src="assets/website-cilex.png" alt="Cilex, PHP command line micro-framework" />
+      </section>
+      <section>
+        <h2><a href="http://phpunit.de"><img src="assets/phpunit.png" width="195" height="135" alt="PHPUnit" style="background:none; border: none; vertical-align: middle;"></a> PHPUnit</h2>
+        <p class="fragment">(Tests or it didn't happen)</p>
+      </section>
+      <section>
+        <img src="assets/website-halbrowser.png" alt="The HAL Browser, a generic reference implementation" />
+      </section>
+      <section>
+        <img src="assets/node-add-form.png" alt="Drupal, the world's best Open Source CMS" />
+      </section>
+      <section>
+        <p>A website is not an API</p>
+        <p class="fragment" style="margin-top: 1em;">A website <em>uses</em> an API</p>
+        <p class="fragment" style="margin-top: 1em;">An API does not need a web site</p>
+      </section>
+      <section>
+        <blockquote>You're not done until you have<br />three implementations</blockquote>
+      </section>
+      <section>
+        <h2>3 implementations?</h2>
+        <ol>
+          <li class="fragment">Unit test</li>
+          <li class="fragment">Web services call</li>
+          <li class="fragment">Command line</li>
+          <li class="fragment">Web site</li>
+        </ol>
+      </section>
+      <section>
+        <h2>Aphorism #4</h2>
+        <p>A UI is not an API</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#5</h1>
+      </section>
+      <section>
+        <blockquote>You know that saying about standing on the shoulders of giants?<br />
+          Drupal is standing on a huge pile of midgets.</blockquote>
+        <p>&mdash; Jeff Eaton</p>
+      </section>
+      <section>
+        <img src="assets/wheel-reinvented.jpg" alt="Don't reinvent the wheel. We have enough already." style="max-width: 80%" data-credit="http://www.flickr.com/photos/conskeptical/191048988" />
+      </section>
+      <section>
+        <p>Don't add to API bloat</p>
+      </section>
+      <section>
+        <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" data-credit="http://xkcd.com/927/" />
+      </section>
+      <section>
+        <h2>Leverage existing patterns</h2>
+        <ul>
+          <li class="fragment">Mimicry is the highest form of flattery</li>
+          <li class="fragment">Mimicry is easier to remember</li>
+          <li class="fragment">Mimicry takes less work</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Existing patterns</h2>
+        <ul>
+          <li class="fragment"><a href="http://blog.ircmaxell.com/2013/02/design-patterns-programming-with-anthony.html">Design patterns</a></li>
+          <li class="fragment">Your platform's patterns
             <ul>
-              <li class="fragment">Mimicry is the highest form of flattery</li>
-              <li class="fragment">Mimicry is easier to remember</li>
-              <li class="fragment">Mimicry takes less work</li>
+              <li>Drupal (Entities, hooks, etc.)</li>
+              <li>Symfony (Events, Bundles, YAML config files)</li>
             </ul>
-          </section>
-          <section>
-            <h2>Existing patterns</h2>
-            <ul>
-              <li class="fragment"><a href="http://blog.ircmaxell.com/2013/02/design-patterns-programming-with-anthony.html">Design patterns</a></li>
-              <li class="fragment">Your platform's patterns
-                <ul>
-                  <li>Drupal (Entities, hooks, etc.)</li>
-                  <li>Symfony (Events, Bundles, YAML config files)</li>
-                </ul>
-              </li>
-            </ul>
-            <p style="margin-top: 1em;" class="fragment">Go with the flow... <span class="fragment">it makes documentation easier</span></p>
-          </section>
-          <section>
-            <h2>Aphorism #5</h2>
-            <p>The best API is the API you didn't have to write</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#6</h1>
-          </section>
-          <section>
-            <blockquote>Use uncertainty as a driver.</blockquote>
-            <p>&mdash; Kevlin Henney, <a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></p>
-          </section>
-          <section>
-            <p>Don't make decisions if you don't have to.</p>
-            <p class="fragment">Make changing your mind cheap.</p>
-            <br /><br />
-            <p class="fragment">(Your client <em>will</em> change his mind.)</p>
-            <p class="fragment">(Twice.)</p>
-          </section>
-          <section>
-            <p>You can only change what is encapsulated.</p>
-          </section>
-          <section>
-            <h2>Logging</h2>
-            <ul>
-              <li class="fragment">Database</li>
-              <li class="fragment">Syslog</li>
-              <li class="fragment">Display on screen</li>
-              <li class="fragment">Pager / SMS message</li>
-              <li class="fragment">Twitter</li>
-            </ul>
-            <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
-          </section>
-          <section>
-            <h3>Interfaces are your friend</h3>
-            <pre><code class="php">interface LogInterface {
+          </li>
+        </ul>
+        <p style="margin-top: 1em;" class="fragment">Go with the flow... <span class="fragment">it makes documentation easier</span></p>
+      </section>
+      <section>
+        <h2>Aphorism #5</h2>
+        <p>The best API is the API you didn't have to write</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#6</h1>
+      </section>
+      <section>
+        <blockquote>Use uncertainty as a driver.</blockquote>
+        <p>&mdash; Kevlin Henney, <a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></p>
+      </section>
+      <section>
+        <p>Don't make decisions if you don't have to.</p>
+        <p class="fragment">Make changing your mind cheap.</p>
+        <br /><br />
+        <p class="fragment">(Your client <em>will</em> change his mind.)</p>
+        <p class="fragment">(Twice.)</p>
+      </section>
+      <section>
+        <p>You can only change what is encapsulated.</p>
+      </section>
+      <section>
+        <h2>Logging</h2>
+        <ul>
+          <li class="fragment">Database</li>
+          <li class="fragment">Syslog</li>
+          <li class="fragment">Display on screen</li>
+          <li class="fragment">Pager / SMS message</li>
+          <li class="fragment">Twitter</li>
+        </ul>
+        <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
+      </section>
+      <section>
+        <h3>Interfaces are your friend</h3>
+        <pre><code class="php">interface LogInterface {
   public method log($message, $severity);
 }</code></pre>
-          </section>
-          <section>
-            <h3>PSR-3</h3>
-            <pre><code class="php">namespace Psr\Log;
+      </section>
+      <section>
+        <h3>PSR-3</h3>
+        <pre><code class="php">namespace Psr\Log;
 
 interface LoggerInterface {
   public function log($level, $message, array $context = array());
@@ -583,39 +595,39 @@ interface LoggerInterface {
   public function info($message, array $context = array());
   public function debug($message, array $context = array());
 }</code></pre>
-          </section>
-          <section>
-            <h3>Caching</h3>
-            <ul>
-              <li class="fragment">Database</li>
-              <li class="fragment">APC</li>
-              <li class="fragment">Memcache</li>
-              <li class="fragment">Redis</li>
-              <li class="fragment">Riak</li>
-            </ul>
-            <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
-          </section>
-          <section>
-            <h3>In Drupal</h3>
-            <pre><code class="php">interface DrupalCacheInterface {
+      </section>
+      <section>
+        <h3>Caching</h3>
+        <ul>
+          <li class="fragment">Database</li>
+          <li class="fragment">APC</li>
+          <li class="fragment">Memcache</li>
+          <li class="fragment">Redis</li>
+          <li class="fragment">Riak</li>
+        </ul>
+        <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
+      </section>
+      <section>
+        <h3>In Drupal</h3>
+        <pre><code class="php">interface DrupalCacheInterface {
   function get($cid);
   function getMultiple(&$cids);
   function set($cid, $data, $expire = CACHE_PERMANENT);
   function clear($cid = NULL, $wildcard = FALSE);
   function isEmpty();
 }</code></pre>
-          </section>
-          <section>
-            <h2>PSR-6 (Draft)</h2>
-            <p>Stay tuned... ;-)</p>
-          </section>
-          <section>
-            <p>Encapsulation avoids decision making</p>
-            <p class="fragment">Avoiding decision making requires loose coupling</p>
-          </section>
-          <section>
-            <h3>Explicit interfaces</h3>
-            <pre><code class="php">namespace Psr\Log;
+      </section>
+      <section>
+        <h2>PSR-6 (Draft)</h2>
+        <p>Stay tuned... ;-)</p>
+      </section>
+      <section>
+        <p>Encapsulation avoids decision making</p>
+        <p class="fragment">Avoiding decision making requires loose coupling</p>
+      </section>
+      <section>
+        <h3>Explicit interfaces</h3>
+        <pre><code class="php">namespace Psr\Log;
 
 interface LoggerInterface {
   public function log($level, $message, array $context = array());
@@ -629,259 +641,270 @@ interface LoggerInterface {
   public function info($message, array $context = array());
   public function debug($message, array $context = array());
 }</code></pre>
-          </section>
-          <section>
-            <h3>Dependency Injection</h3>
-            <p class="fragment">Not just for testing...</p>
-            <p class="fragment">Also for day-before-launch-changes</p>
-          </section>
-          <section>
-            <h2>Separate Logic from Data</h2>
-            <div>
-              <div style="float: left;"><img src="assets/spock.jpg" alt="Logic" style="max-height: 400px;" /></div>
-              <div style="float: right;"><img src="assets/data.jpg" alt="Data"  style="max-height: 400px;" /></div>
-            </div>
-          </section>
-          <section>
-            <h2>Separation of concerns</h2>
-            <ul>
-              <li class="fragment">Interface-driven development</li>
-              <li class="fragment">Context-free (stateless) services</li>
-              <li class="fragment">Single-Responsibility Principle</li>
-              <li class="fragment">Dependency injection</li>
+      </section>
+      <section>
+        <h3>Dependency Injection</h3>
+        <p class="fragment">Not just for testing...</p>
+        <p class="fragment">Also for day-before-launch-changes</p>
+      </section>
+      <section>
+        <h2>Separate Logic from Data</h2>
+        <div>
+          <div style="float: left;"><img src="assets/spock.jpg" alt="Logic" style="max-height: 400px;" /></div>
+          <div style="float: right;"><img src="assets/data.jpg" alt="Data"  style="max-height: 400px;" /></div>
+        </div>
+      </section>
+      <section>
+        <h2>Separation of concerns</h2>
+        <ul>
+          <li class="fragment">Interface-driven development</li>
+          <li class="fragment">Context-free (stateless) services</li>
+          <li class="fragment">Single-Responsibility Principle</li>
+          <li class="fragment">Dependency injection</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Aphorism #6</h2>
+        <p>Avoid making decisions</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#7</h1>
+      </section>
+      <section>
+        <p>Delegation adds indirection</p>
+        <p class="fragment">Indirection requires abstraction</p>
+        <p class="fragment">Abstraction <del>solves</del> hides complexity</p>
+      </section>
+      <section>
+        <p>Abstraction is not free</p>
+      </section>
+      <section>
+        <h2>Performance</h2>
+        <ul>
+          <li class="fragment">
+            <a href="http://www.garfieldtech.com/blog/magic-benchmarks">Language level</a>
+            <ul class="fragment">
+              <li>call_user_func_array() = 3 functions</li>
+              <li>__call() = 3 methods</li>
             </ul>
-          </section>
-          <section>
-            <h2>Aphorism #6</h2>
-            <p>Avoid making decisions</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#7</h1>
-          </section>
-          <section>
-            <p>Delegation adds indirection</p>
-            <p class="fragment">Indirection requires abstraction</p>
-            <p class="fragment">Abstraction <del>solves</del> hides complexity</p>
-          </section>
-          <section>
-            <p>Abstraction is not free</p>
-          </section>
-          <section>
-            <h2>Performance</h2>
+          </li>
+          <li class="fragment">
+            <a href="http://drupal.org/node/1067802">Query builders</a> in Drupal
             <ul>
-              <li class="fragment">
-                <a href="http://www.garfieldtech.com/blog/magic-benchmarks">Language level</a>
-                <ul class="fragment">
-                  <li>call_user_func_array() = 3 functions</li>
-                  <li>__call() = 3 methods</li>
-                </ul>
-              </li>
-              <li class="fragment">
-                <a href="http://drupal.org/node/1067802">Query builders</a> in Drupal
-                <ul>
-                  <li class="fragment">Query builder is 30% slower than raw queries</li>
-                  <li class="fragment">(Drupal's query builder is really simple, too...)</li>
-                </ul>
-              </li>
+              <li class="fragment">Query builder is 30% slower than raw queries</li>
+              <li class="fragment">(Drupal's query builder is really simple, too...)</li>
             </ul>
-          </section>
-          <section>
-            <p>What the heck is going on under the hood?</p>
-            <br />
-            <p style="text-align: right;" class="fragment">... 14 method calls later I still don't know.</p>
-          </section>
-          <section>
-            <blockquote>There are two ways of constructing a software design:
-              One way is to make it so simple that there are obviously no
-              deficiencies, and the other way is to make it so complicated that
-              there are no obvious deficiencies.</blockquote>
-            <p>&mdash; C. A. R. Hoare</p>
-          </section>
-          <section>
-            <blockquote>The unavoidable price of reliability is simplicity.</blockquote>
-            <p>&mdash; C. A. R. Hoare</p>
-          </section>
-          <section>
-            <h2>Aphorism #7</h2>
-            <p>There is no problem that cannot be solved by adding<br />another layer of abstraction...</p>
-            <p class="fragment">except abstraction</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h1>#8</h1>
-          </section>
-          <section>
-            <p><del>Drupal</del>Your software has idiosyncrasies, but it's not special.</p>
-          </section>
-          <section>
-            <p>No one understands Drupalisms,<br /> except Drupal developers</p>
-            <p class="fragment">(And not even all of them)</p>
-          </section>
-          <section>
-            <p>No one understands Symfonyisms,<br /> except Symfony developers</p>
-            <p class="fragment">(And not even all of them)</p>
-          </section>
-          <section>
-            <p>No one understands PHPisms,<br /> except PHP developers</p>
-            <p class="fragment">(And not even all of them)</p>
-          </section>
-          <section>
-            <p>No one understands your system,<br /> except you</p>
-            <p class="fragment">(And sometimes not even then)</p>
-          </section>
-          <section>
-            <img src="assets/chx-resig.jpg" alt="Karoly Negyesi and John Resig" />
-            <p class="fragment">No matter how cool you are,<br />John Resig knows more Javascript than you do.</p>
-          </section>
-          <section>
-            <h2>Some numbers</h2>
-            <ul>
-              <li class="fragment">Age of 3rd gen languages: 56 years</li>
-              <li class="fragment">Age of PHP: 18 years</li>
-              <li class="fragment">Age of Drupal: 12 years</li>
-              <li class="fragment">Age of your website: 6 months</li>
-            </ul>
-            <p style="margin-top: 2em;" class="fragment">Odds of you doing something original...?</p>
-          </section>
-          <section>
-            <h2>Find existing wheels</h2>
-            <ul>
-              <li class="fragment">Composer / <a href="http://www.packagist.org/">Packagist.org</a></li>
-              <li class="fragment"><a href="http://www.symfony.com/">Symfony2 Components</a></li>
-              <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
-            </ul>
-          </section>
-          <section>
-            <h2>Use existing platforms</h2>
-            <ul>
-              <li class="fragment"><a href="http://www.symfony.com/">Symfony2</a></li>
-              <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
-              <li class="fragment"><a href="http://cakephp.org/">CakePHP</a></li>
-              <li class="fragment"><a href="http://drupal.org/">Drupal</a></li>
-              <li class="fragment">Do not insert your from-scratch system here</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Use existing standards</h2>
-            <ul>
-              <li class="fragment"><a href="http://www.php-fig.org/">PHP-FIG</a> Specifications</li>
-              <li class="fragment">Learn your HTTP!</li>
-              <li class="fragment">REST API: <q class="fragment">I can go home and rest and not design from scratch</q></li>
-            </ul>
-          </section>
-          <section>
-            <h2>Learn from existing wheels</h2>
-            <ul>
-              <li class="fragment">PECL</li>
-              <li class="fragment">jQuery</li>
-              <li class="fragment">Wordpress(!)</li>
-              <li class="fragment">Symfony2, Zend Framework, etc.</li>
-              <li class="fragment">Java</li>
-              <li class="fragment">Design patterns</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Drupal 8</h2>
-            <ul>
-              <li class="fragment">Symfony2 <small>(HttpFoundation, HttpKernel, DependencyInjection, EventDispatcher, Routing, Serializer, Validator, Yaml)</small></li>
-              <li class="fragment">Symfony CMF</li>
-              <li class="fragment">Zend Feed</li>
-              <li class="fragment">Doctrine Annotations</li>
-              <li class="fragment">Guzzle</li>
-              <li class="fragment">EasyRDF</li>
-              <li class="fragment">Assetic</li>
-              <li class="fragment">Twig</li>
-            </ul>
-          </section>
-          <section>
-            <p>Feature no software needs</p>
-            <br />
-            <h1 class="fragment">Ego</h1>
-          </section>
-          <section>
-            <h2>Durden's Law</h2>
-            <img src="assets/tyler-durden.jpg" alt="Tyler Durden, Philosopher" data-credit="http://manvsdebt.com/tyler-durdens-guide-to-personal-finance/" />
-          </section>
-          <section>
-            <h2>Aphorism #8</h2>
-            <p>You are not a special and unique snowflake</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h3>Grand Unified Theory of API design</h3>
-          </section>
-          <section>
-            <blockquote>Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.</blockquote>
-            <p>&mdash; Martin Golding</p>
-          </section>
-          <section>
-            <p>You will always know where you live.</p>
-          </section>
-          <section>
-            <p>In six months, some one will need to do something you never thought of with your code and will not be able to edit it.</p>
-          </section>
-          <section>
-            <p>That will be you.</p>
-            <p class="fragment" style="margin-top: 2em;">Plan accordingly.</p>
-          </section>
-        </section>
-        <section>
-          <h2>Stalk me!</h2>
-          <p><a href="http://www.palantir.net/">http://www.palantir.net/</a></p>
-          <p><a href="http://www.garfieldtech.com/">http://www.garfieldtech.com/</a></p>
-          <p><a href="http://twitter.com/Crell">@Crell</a></p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <p>What the heck is going on under the hood?</p>
+        <br />
+        <p style="text-align: right;" class="fragment">... 14 method calls later I still don't know.</p>
+      </section>
+      <section>
+        <blockquote>There are two ways of constructing a software design:
+          One way is to make it so simple that there are obviously no
+          deficiencies, and the other way is to make it so complicated that
+          there are no obvious deficiencies.</blockquote>
+        <p>&mdash; C. A. R. Hoare</p>
+      </section>
+      <section>
+        <blockquote>The unavoidable price of reliability is simplicity.</blockquote>
+        <p>&mdash; C. A. R. Hoare</p>
+      </section>
+      <section>
+        <h2>Aphorism #7</h2>
+        <p>There is no problem that cannot be solved by adding<br />another layer of abstraction...</p>
+        <p class="fragment">except abstraction</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h1>#8</h1>
+      </section>
+      <section>
+        <p><del>Drupal</del>Your software has idiosyncrasies, but it's not special.</p>
+      </section>
+      <section>
+        <p>No one understands Drupalisms,<br /> except Drupal developers</p>
+        <p class="fragment">(And not even all of them)</p>
+      </section>
+      <section>
+        <p>No one understands Symfonyisms,<br /> except Symfony developers</p>
+        <p class="fragment">(And not even all of them)</p>
+      </section>
+      <section>
+        <p>No one understands PHPisms,<br /> except PHP developers</p>
+        <p class="fragment">(And not even all of them)</p>
+      </section>
+      <section>
+        <p>No one understands your system,<br /> except you</p>
+        <p class="fragment">(And sometimes not even then)</p>
+      </section>
+      <section>
+        <img src="assets/chx-resig.jpg" alt="Karoly Negyesi and John Resig" />
+        <p class="fragment">No matter how cool you are,<br />John Resig knows more Javascript than you do.</p>
+      </section>
+      <section>
+        <h2>Some numbers</h2>
+        <ul>
+          <li class="fragment">Age of 3rd gen languages: 56 years</li>
+          <li class="fragment">Age of PHP: 18 years</li>
+          <li class="fragment">Age of Drupal: 12 years</li>
+          <li class="fragment">Age of your website: 6 months</li>
+        </ul>
+        <p style="margin-top: 2em;" class="fragment">Odds of you doing something original...?</p>
+      </section>
+      <section>
+        <h2>Find existing wheels</h2>
+        <ul>
+          <li class="fragment">Composer / <a href="http://www.packagist.org/">Packagist.org</a></li>
+          <li class="fragment"><a href="http://www.symfony.com/">Symfony2 Components</a></li>
+          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Use existing platforms</h2>
+        <ul>
+          <li class="fragment"><a href="http://www.symfony.com/">Symfony2</a></li>
+          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
+          <li class="fragment"><a href="http://cakephp.org/">CakePHP</a></li>
+          <li class="fragment"><a href="http://drupal.org/">Drupal</a></li>
+          <li class="fragment">Do not insert your from-scratch system here</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Use existing standards</h2>
+        <ul>
+          <li class="fragment"><a href="http://www.php-fig.org/">PHP-FIG</a> Specifications</li>
+          <li class="fragment">Learn your HTTP!</li>
+          <li class="fragment">REST API: <q class="fragment">I can go home and rest and not design from scratch</q></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Learn from existing wheels</h2>
+        <ul>
+          <li class="fragment">PECL</li>
+          <li class="fragment">jQuery</li>
+          <li class="fragment">Wordpress(!)</li>
+          <li class="fragment">Symfony2, Zend Framework, etc.</li>
+          <li class="fragment">Java</li>
+          <li class="fragment">Design patterns</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Drupal 8</h2>
+        <ul>
+          <li class="fragment">Symfony2 <small>(HttpFoundation, HttpKernel, DependencyInjection, EventDispatcher, Routing, Serializer, Validator, Yaml)</small></li>
+          <li class="fragment">Symfony CMF</li>
+          <li class="fragment">Zend Feed</li>
+          <li class="fragment">Doctrine Annotations</li>
+          <li class="fragment">Guzzle</li>
+          <li class="fragment">EasyRDF</li>
+          <li class="fragment">Assetic</li>
+          <li class="fragment">Twig</li>
+        </ul>
+      </section>
+      <section>
+        <p>Feature no software needs</p>
+        <br />
+        <h1 class="fragment">Ego</h1>
+      </section>
+      <section>
+        <h2>Durden's Law</h2>
+        <img src="assets/tyler-durden.jpg" alt="Tyler Durden, Philosopher" data-credit="http://manvsdebt.com/tyler-durdens-guide-to-personal-finance/" />
+      </section>
+      <section>
+        <h2>Aphorism #8</h2>
+        <p>You are not a special and unique snowflake</p>
+      </section>
+    </section>
+    <section>
+      <section>
+        <h3>Grand Unified Theory of API design</h3>
+      </section>
+      <section>
+        <blockquote>Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.</blockquote>
+        <p>&mdash; Martin Golding</p>
+      </section>
+      <section>
+        <p>You will always know where you live.</p>
+      </section>
+      <section>
+        <p>In six months, some one will need to do something you never thought of with your code and will not be able to edit it.</p>
+      </section>
+      <section>
+        <p>That will be you.</p>
+        <p class="fragment" style="margin-top: 2em;">Plan accordingly.</p>
+      </section>
+    </section>
 
-          <h3 style="margin-top: 1em;">Tell me how I did</h3>
-          <p><a href="https://joind.in/9367">https://joind.in/9367</a></p>
+    <section id="final">
+      <h2>Larry Garfield</h2>
+      <p>Director of Runtimes and Integrations <a href="http://www.platform.sh/">Platform.sh</a></p>
+      <p>Continuous Deployment Cloud Hosting</p>
+      <p>Stalk us at <a href="http://twitter.com/Platformsh">@PlatformSH</a></p>
 
-          <h3 style="margin-top: 1em;">Thanks!</h3>
-        </section>
-        <section>
-          <h2>Further reading</h2>
-          <ul>
-            <li><em><a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></em>, by Richard Monson-Haefel</li>
-            <li><a href="http://TheDailyWTF.com/">http://TheDailyWTF.com/</a></li>
-            <li><em>Design Patterns: Elements of Reusable Object-Oriented Software</em>, by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</li>
-            <li><a href="http://www.SoftwareQuotes.com/">http://www.SoftwareQuotes.com/</a></li>
-          </ul>
-        </section>
-      </div>
-    </div>
+      <p style="margin-top: 2em"><small>Thanks to <a href="http://www.palantir.net/">Palantir.net</a> for helping develop these slides</small></p>
+    </section>
 
+    <section>
+      <h2>Further reading</h2>
+      <ul>
+        <li><em><a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></em>, by Richard Monson-Haefel</li>
+        <li><a href="http://TheDailyWTF.com/">http://TheDailyWTF.com/</a></li>
+        <li><em>Design Patterns: Elements of Reusable Object-Oriented Software</em>, by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</li>
+        <li><a href="http://www.SoftwareQuotes.com/">http://www.SoftwareQuotes.com/</a></li>
+      </ul>
+    </section>
 
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.min.js"></script>
+  </div>
 
-    <script>
+</div>
 
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+<script>
 
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-        ]
-      });
+  // Full list of configuration options available at:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
 
-    </script>
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
 
+    // Optional reveal.js plugins
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true }
+    ]
+  });
 
-  </body>
+</script>
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

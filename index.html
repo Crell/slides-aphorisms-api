@@ -60,7 +60,7 @@
   <div class="slides">
 
     <section>
-      <h1>Aphorisms of API Design</h1>
+      <h1>Aphorisms of<br />API Design</h1>
       <p>
         <small>Presented by <a href="http://www.garfieldtech.com/">Larry Garfield</a> (<a href="http://twitter.com/Crell">@Crell</a>)</small>
       </p>
@@ -98,7 +98,7 @@
       </section>
       <section>
         <h3>They're not rules</h3>
-        <img src="assets/captain-barbados.gif" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
+        <img src="assets/captain-barbados.gif" width="80%" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
         <h3>They're more like guidelines</h3>
       </section>
       <section>
@@ -127,27 +127,31 @@
         <p>Machine names > Constants</p>
       </section>
       <section>
-            <pre><code class="php">
+        <pre class="font--24"><code class="php" data-trim>
 const STATUS_PUBLISHED = 1;
 const STATUS_DRAFT = 0;
 
 function load_articles_by_status($status) {
   // Find articles $ids for $status
   return article_load_multiple($ids);
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <p>Oops</p>
-        <pre><code class="php">const MYMODULE_STATUS_PENDING = 3;
+        <pre class="font--24"><code class="php" data-trim>
+const MYMODULE_STATUS_PENDING = 3;
 
-const YOURMODULE_STATUS_IN_REVIEW = 3;</code></pre>
+const YOURMODULE_STATUS_IN_REVIEW = 3;
+        </code></pre>
       </section>
       <section>
-            <pre><code class="php">
+        <pre class="font--24"><code class="php" data-trim>
 function load_articles_by_status($status = '') {
   // Find articles $ids for $status
   return article_load_multiple($ids);
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h3>But aren't booleans 2-state?</h3>
@@ -170,15 +174,17 @@ function load_articles_by_status($status = '') {
       </section>
       <section>
         <h3>Drupal 6</h3>
-        <pre><code class="php">// Fetch one node.
+        <pre class="font--24"><code class="php" data-trim>
+// Fetch one node.
 function node_load($nid) {
   $record = db_query("SELECT * FROM node WHERE nid=:nid", [':nid' => $nid])
     ->fetchObject();
   $record = load_extra_stuff($record);
   return $record;
-}</code></pre>
-
-        <pre class="fragment"><code class="php">// Fetch multiple nodes.
+}
+        </code></pre>
+        <pre class="font--24"><code class="php" data-trim>
+// Fetch multiple nodes.
 function node_load_multiple(array $nids) {
   $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
     ->fetchAll();
@@ -186,7 +192,8 @@ function node_load_multiple(array $nids) {
     $loaded[] = load_extra_stuff($record);
   }
   return $loaded;
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h2>SELECT N + 1</h2>
@@ -194,7 +201,8 @@ function node_load_multiple(array $nids) {
       </section>
       <section>
         <h3>Drupal 7</h3>
-        <pre><code class="php">// Fetch one node.
+        <pre class="font--24"><code class="php" data-trim>
+// Fetch one node.
 function node_load($nid) {
   $nodes = node_load_multiple(array($nid));
   return reset($nodes);
@@ -206,7 +214,8 @@ function node_load_multiple(array $nids) {
     ->fetchAll();
   $records = load_extra_stuff($records);
   return $records;
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h2>Aphorism #1</h2>
@@ -230,18 +239,21 @@ function node_load_multiple(array $nids) {
       </section>
       <section>
         <h2>Drupal 6 theme system</h2>
-        <pre><code class="php">function theme($hook) {
+        <pre class="font--24"><code class="php" data-trim>
+function theme($hook) {
   // ...
   if (!isset($hooks[$hook])) {
     return;
   }
   // ...
   return $output;
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h2>Drupal 7 theme system</h2>
-        <pre><code class="php">function theme($hook, $variables = array()) {
+        <pre class="font--24"><code class="php" data-trim>
+function theme($hook, $variables = array()) {
   // ...
   if (!isset($hooks[$hook])) {
     if (!isset($candidate)) {
@@ -251,7 +263,8 @@ function node_load_multiple(array $nids) {
   }
   // ...
   return $output;
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <p>General failure reading Drive C:</p>
@@ -267,7 +280,8 @@ function node_load_multiple(array $nids) {
       </section>
       <section>
         <h3>Good APIs are picky</h3>
-        <pre><code class="php">class InsertQuery extends Query {
+        <pre class="font--24"><code class="php" data-trim>
+class InsertQuery extends Query {
   public function fields(array $fields, array $values = []) {
     // ...
   }
@@ -278,7 +292,8 @@ function node_load_multiple(array $nids) {
     // ...
     return TRUE;
   }
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <blockquote>A good programmer is someone who always looks both ways before crossing a one-way street.</blockquote>
@@ -306,7 +321,8 @@ function node_load_multiple(array $nids) {
         <p class="fragment" style="margin-top: 1em;"><em>I</em> can't understand what you don't document.</p>
       </section>
       <section>
-            <pre><code class="php">abstract class FileTransferFTP extends FileTransfer {
+        <pre class="font--24"><code class="php" data-trim>
+abstract class FileTransferFTP extends FileTransfer {
    /**
     * Return an object which can implement the FTP protocol.
     *
@@ -317,15 +333,18 @@ function node_load_multiple(array $nids) {
     *    options. If the FTP PHP extension is available, use it.
     */
    static function factory($jail, $settings) { }
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h3>Date.module</h3>
-        <pre><code class="php">/**
+        <pre class="font--24"><code class="php" data-trim>
+/**
  * Getter callback to return date values as datestamp in UTC from the field.
  */
 function date_entity_metadata_field_getter($object, array $options,
-                                           $name, $obj_type, &$context) { }</code></pre>
+                                           $name, $obj_type, &$context) { }
+        </code></pre>
         <p class="fragment" style="margin-top: 1em;">No, seriously, WTF?</p>
       </section>
       <section>
@@ -367,7 +386,8 @@ function date_entity_metadata_field_getter($object, array $options,
         <img class="fragment" src="assets/bullshit-corner.jpg" alt="Um, no." data-credit="http://www.flickr.com/photos/ilgiovanewalter/3907286916/" />
       </section>
       <section>
-            <pre><code class="php">protected function normalizeCharset($value) {
+        <pre class="font--24"><code class="php" data-trim>
+protected function normalizeCharset($value) {
     switch (mb_detect_encoding($value)) {
     case 'ASCII':
       break;
@@ -383,11 +403,13 @@ function date_entity_metadata_field_getter($object, array $options,
       $this->log->warn("Unrecognized character encoding.");
   }
   return $value;
-}</code></pre>
+}
+        </code></pre>
         <p class="fragment">WTF is up with UTF-8? And why is FALSE Windows-1252?</p>
       </section>
       <section>
-            <pre><code class="php">protected function normalizeCharset($value) {
+        <pre class="font--24"><code class="php" data-trim>
+protected function normalizeCharset($value) {
   // mb_detect_encoding() in most situations supports only two character sets,
   // ASCII and UTF-8.  However, it is sadly not unusual for incoming data
   // to be in Windows-1252, aka MS Word. We therefore guess that a
@@ -397,10 +419,12 @@ function date_entity_metadata_field_getter($object, array $options,
   // those three is rather high.
 
   // ...
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
-<pre><code class="php">switch (mb_detect_encoding($value)) {
+        <pre class="font--24"><code class="php" data-trim>
+switch (mb_detect_encoding($value)) {
   // I have absolutely no idea why UTF-8 strings need to be converted
   // from UTF-8 to UTF-8, but if this code is removed many strings end up
   // failing with invalid multi-byte encoding.
@@ -416,10 +440,10 @@ function date_entity_metadata_field_getter($object, array $options,
     // from HTML entities to UTF-8 characters.
     $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
     break;
-</code></pre>
+        </code></pre>
       </section>
       <section>
-<pre><code class="php">
+        <pre class="font--24"><code class="php" data-trim>
   // ...
 
   // A False return from mb_detect_encoding() means that it couldn't
@@ -432,7 +456,8 @@ function date_entity_metadata_field_getter($object, array $options,
     $value = iconv('Windows-1252', 'UTF-8//TRANSLIT', $value);
     $this->log->warn("Detected Windows-1252 character encoding.");
     break;
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h1>&lt;/aside&gt;</h1>
@@ -575,13 +600,16 @@ function date_entity_metadata_field_getter($object, array $options,
       </section>
       <section>
         <h3>Interfaces are your friend</h3>
-        <pre><code class="php">interface LogInterface {
+        <pre class="font--24"><code class="php" data-trim>
+interface LogInterface {
   public method log($message, $severity);
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h3>PSR-3</h3>
-        <pre><code class="php">namespace Psr\Log;
+        <pre class="font--24"><code class="php" data-trim>
+namespace Psr\Log;
 
 interface LoggerInterface {
   public function log($level, $message, array $context = array());
@@ -594,7 +622,8 @@ interface LoggerInterface {
   public function notice($message, array $context = array());
   public function info($message, array $context = array());
   public function debug($message, array $context = array());
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h3>Caching</h3>
@@ -627,7 +656,8 @@ interface LoggerInterface {
       </section>
       <section>
         <h3>Explicit interfaces</h3>
-        <pre><code class="php">namespace Psr\Log;
+        <pre class="font--24"><code class="php" data-trim>
+namespace Psr\Log;
 
 interface LoggerInterface {
   public function log($level, $message, array $context = array());
@@ -640,7 +670,8 @@ interface LoggerInterface {
   public function notice($message, array $context = array());
   public function info($message, array $context = array());
   public function debug($message, array $context = array());
-}</code></pre>
+}
+        </code></pre>
       </section>
       <section>
         <h3>Dependency Injection</h3>
@@ -895,16 +926,3 @@ interface LoggerInterface {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

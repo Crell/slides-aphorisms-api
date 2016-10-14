@@ -55,7 +55,7 @@
       text-shadow: 3px 3px 10px #990000;
     }
 
-    p + p {
+    p + p, ul + p, dl + p {
       margin-top: 1em;
     }
   </style>
@@ -392,7 +392,7 @@ class InsertQuery extends Query {
           <dt>Python</dt>
           <dd>python -W all file.py</dd>
         </dl>
-        <p id="error-wrong" class="fragment" data-classer="error-wrong" data-classer-class="bigdeal" style="margin-top: 1em;">You're Doing It Wrong!</p>
+        <p id="error-wrong" class="fragment" data-classer="error-wrong" data-classer-class="bigdeal">You're Doing It Wrong!</p>
       </section>
       <section>
         <h2>Aphorism #2</h2>
@@ -405,7 +405,7 @@ class InsertQuery extends Query {
       </section>
       <section>
         <p class="bigtext">You can't teach what you don't know.</p>
-        <p class="fragment bigtext" style="margin-top: 1em;">You don't know what you can't teach.</p>
+        <p class="fragment bigtext">You don't know what you can't teach.</p>
       </section>
       <section>
         <p class="bigtext">You don't understand what you can't document.</p>
@@ -459,7 +459,7 @@ function date_entity_metadata_field_getter($object, array $options,
           <li class="fragment"><em>Every</em> parameter</li>
           <li class="fragment"><em>Every</em> return value</li>
         </ul>
-        <p class="fragment" style="margin-top: 1em;"><em>No</em> exceptions <span class="fragment">(Well, document those, too)</span></p>
+        <p class="fragment"><em>No</em> exceptions <span class="fragment">(Well, document those, too)</span></p>
       </section>
       <section>
         <img src="assets/type-all-the-things.jpg" width="75%" alt="Type check all the things!" />
@@ -640,10 +640,10 @@ switch (mb_detect_encoding($value)) {
         <img src="assets/wheel-reinvented.jpg" alt="Don't reinvent the wheel. We have enough already." style="max-width: 80%" data-credit="http://www.flickr.com/photos/conskeptical/191048988" />
       </section>
       <section>
-        <p>Don't add to API bloat</p>
+        <p class="bigtext">Don't add to API bloat</p>
       </section>
       <section>
-        <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" data-credit="http://xkcd.com/927/" />
+        <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" width="75%" data-credit="http://xkcd.com/927/" />
       </section>
       <section>
         <h2>Leverage existing patterns</h2>
@@ -661,14 +661,16 @@ switch (mb_detect_encoding($value)) {
             <ul>
               <li>Drupal (Entities, hooks, etc.)</li>
               <li>Symfony (Events, Bundles, YAML config files)</li>
+              <li>Language idioms (Go, Python, etc.)</li>
+              <li>Language coding style guides</li>
             </ul>
           </li>
         </ul>
-        <p style="margin-top: 1em;" class="fragment">Go with the flow... <span class="fragment">it makes documentation easier</span></p>
+        <p class="fragment bigtext">Go with the flow... <span class="fragment">it makes docs easier</span></p>
       </section>
       <section>
         <h2>Aphorism #5</h2>
-        <p>The best API is the API you didn't have to write</p>
+        <p class="bigtext">The best API is the API you didn't have to write</p>
       </section>
     </section>
     <section>
@@ -677,17 +679,17 @@ switch (mb_detect_encoding($value)) {
       </section>
       <section>
         <blockquote>Use uncertainty as a driver.</blockquote>
-        <p>&mdash; Kevlin Henney, <a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></p>
+        <p>&mdash;Kevlin Henney, <a href="http://97things.oreilly.com/wiki/index.php/97_Things_Every_Software_Architect_Should_Know_-_The_Book">97 Things Every Software Architect Should Know</a></p>
       </section>
       <section>
-        <p>Don't make decisions if you don't have to.</p>
-        <p class="fragment">Make changing your mind cheap.</p>
+        <p class="bigtext">Don't make decisions if you don't have to.</p>
+        <p class="fragment bigtext">Make changing your mind cheap.</p>
         <br /><br />
-        <p class="fragment">(Your client <em>will</em> change his mind.)</p>
-        <p class="fragment">(Twice.)</p>
+        <p class="fragment bigtext">(Your client <em>will</em> change their mind.)</p>
+        <p class="fragment bigtext">(Twice.)</p>
       </section>
       <section>
-        <p>You can only change what is encapsulated.</p>
+        <p class="bigtext">You can only change what is encapsulated.</p>
       </section>
       <section>
         <h2>Logging</h2>
@@ -698,7 +700,7 @@ switch (mb_detect_encoding($value)) {
           <li class="fragment">Pager / SMS message</li>
           <li class="fragment">Twitter</li>
         </ul>
-        <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
+        <p class="fragment">Don't decide for me!</p>
       </section>
       <section>
         <h3>Interfaces are your friend</h3>
@@ -728,33 +730,25 @@ interface LoggerInterface {
         </code></pre>
       </section>
       <section>
-        <h3>Caching</h3>
-        <ul>
-          <li class="fragment">Database</li>
-          <li class="fragment">APC</li>
-          <li class="fragment">Memcache</li>
-          <li class="fragment">Redis</li>
-          <li class="fragment">Riak</li>
-        </ul>
-        <p class="fragment" style="margin-top: 1em;">Don't decide for me!</p>
+        <pre class="font--24"><code class="php" data-trim>
+function engage_engine(Engine $engine) {
+    // ...
+    $engine->engage();
+}
+        </code></pre>
+        <aside class="notes">
+          <ul>
+            <li>Support any type of engine, even if you only have one for now!</li>
+          </ul>
+        </aside>
       </section>
       <section>
-        <h3>In Drupal</h3>
-        <pre><code class="php">interface DrupalCacheInterface {
-  function get($cid);
-  function getMultiple(&$cids);
-  function set($cid, $data, $expire = CACHE_PERMANENT);
-  function clear($cid = NULL, $wildcard = FALSE);
-  function isEmpty();
-}</code></pre>
+        <p class="bigtext">One is a special case of many</p>
+        <p class="bigtext fragment">How many implementations will you have?</p>
       </section>
       <section>
-        <h2>PSR-6 (Draft)</h2>
-        <p>Stay tuned... ;-)</p>
-      </section>
-      <section>
-        <p>Encapsulation avoids decision making</p>
-        <p class="fragment">Avoiding decision making requires loose coupling</p>
+        <p class="bigtext">Encapsulation avoids decision making</p>
+        <p class="fragment bigtext">Avoiding decision making requires<br />loose coupling</p>
       </section>
       <section>
         <h3>Explicit interfaces</h3>
@@ -776,9 +770,18 @@ interface LoggerInterface {
         </code></pre>
       </section>
       <section>
+        <h3>YAGNI is the devil</h3>
+        <p class="fragment bigtext">All things in moderation</p>
+        <aside class="notes">
+          <ul>
+            <li>If it's easy to give yourself an "out", do so.</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
         <h3>Dependency Injection</h3>
-        <p class="fragment">Not just for testing...</p>
-        <p class="fragment">Also for day-before-launch-changes</p>
+        <p class="fragment bigtext">Not just for testing...</p>
+        <p class="fragment bigtext">Also for day-before-launch-changes</p>
       </section>
       <section>
         <h2>Separate Logic from Data</h2>
@@ -798,7 +801,7 @@ interface LoggerInterface {
       </section>
       <section>
         <h2>Aphorism #6</h2>
-        <p>Avoid making decisions</p>
+        <p class="bigtext">Avoid making decisions</p>
       </section>
     </section>
     <section>

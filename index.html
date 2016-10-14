@@ -47,6 +47,13 @@
       bottom: 50px;
       display: none;
     }
+
+    p.bigdeal {
+      font-size: 200%;
+      color: Red;
+      font-style: italic;
+      text-shadow: 3px 3px 10px #990000;
+    }
   </style>
 
 </head>
@@ -283,11 +290,11 @@ function node_load_multiple(array $nids) {
         <p>&mdash; Rasmus Lerdorf</p>
       </section>
       <section>
-        <p>Make the code debug for you</p>
+        <p class="bigtext">Make the code debug for you</p>
       </section>
       <section>
-        <p>Don't plan for everything that could happen</p>
-        <p class="fragment">Plan for how it will break</p>
+        <p class="bigtext">Don't plan for everything that could happen</p>
+        <p class="fragment bigtext">Plan for how it will break</p>
       </section>
       <section>
         <h2>Drupal 6 theme system</h2>
@@ -309,7 +316,7 @@ function theme($hook, $variables = array()) {
   // ...
   if (!isset($hooks[$hook])) {
     if (!isset($candidate)) {
-      watchdog('Theme key "{$hook}" not found.');
+      log('Theme key "{$hook}" not found.');
     }
     return '';
   }
@@ -319,16 +326,29 @@ function theme($hook, $variables = array()) {
         </code></pre>
       </section>
       <section>
-        <p>General failure reading Drive C:</p>
+        <p class="bigtext">General failure reading Drive C:</p>
         <p class="fragment"><code>PHP Warning:  Invalid argument supplied for foreach() in /includes/form.inc on line 2975</code></p>
+        <aside class="notes">
+          <ul>
+            <li>Middle of recusively processing deep array...</li>
+          </ul>
+        </aside>
       </section>
       <section>
-        <p>Code failure is like voting in Chicago</p>
+        <p class="bigtext">Code failure is like voting in Chicago</p>
       </section>
       <section>
         <h2>Fail early, fail often</h2>
-        <p class="fragment">Constrain inputs</p>
-        <p class="fragment">Fail usefully</p>
+        <p class="fragment bigtext">Constrain inputs</p>
+        <p class="fragment bigtext">Fail usefully</p>
+      </section>
+      <section>
+        <img src="assets/type-all-the-things.jpg" width="75%" alt="Type check all the things!" />
+        <aside class="notes">
+          <ul>
+            <li>Static types are the code syntax debugging for you.</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <h3>Good APIs are picky</h3>
@@ -346,14 +366,29 @@ class InsertQuery extends Query {
   }
 }
         </code></pre>
+        <aside class="notes">
+          <ul>
+            <li>Type enforce on fields()</li>
+            <li>Will be invalid SQL anyway, so throw more meaningful exception.</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <blockquote>A good programmer is someone who always looks both ways before crossing a one-way street.</blockquote>
-        <p>&mdash; Doug Linder</p>
+        <p>&mdash;Doug Linder</p>
       </section>
       <section>
-        <p>If you're not developing under
-          <strong>E_ALL|E_STRICT</strong>,<br /><em>you're doing it wrong</em>.</p>
+        <p class="bigtext">Are you not using...</p>
+        <dl>
+          <dt>PHP</dt>
+          <dd>E_ALL|E_STRICT</dd>
+          <dd>declare(strict_types=1);</dd>
+          <dt>Javascript</dt>
+          <dd>"use strict"</dd>
+          <dt>Python</dt>
+          <dd>python -W all file.py</dd>
+        </dl>
+        <p id="error-wrong" class="fragment" data-classer="error-wrong" data-classer-class="bigdeal" style="margin-top: 1em;">You're Doing It Wrong!</p>
       </section>
       <section>
         <h2>Aphorism #2</h2>

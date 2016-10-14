@@ -809,12 +809,12 @@ interface LoggerInterface {
         <h1>#7</h1>
       </section>
       <section>
-        <p>Delegation adds indirection</p>
-        <p class="fragment">Indirection requires abstraction</p>
-        <p class="fragment">Abstraction <del>solves</del> hides complexity</p>
+        <p class="bigtext">Delegation adds indirection</p>
+        <p class="bigtext fragment">Indirection requires abstraction</p>
+        <p class="bigtext fragment">Abstraction <del>solves</del> hides complexity</p>
       </section>
       <section>
-        <p>Abstraction is not free</p>
+        <h3>Abstraction is not free</h3>
       </section>
       <section>
         <h2>Performance</h2>
@@ -830,15 +830,15 @@ interface LoggerInterface {
             <a href="http://drupal.org/node/1067802">Query builders</a> in Drupal
             <ul>
               <li class="fragment">Query builder is 30% slower than raw queries</li>
-              <li class="fragment">(Drupal's query builder is really simple, too...)</li>
+              <li class="fragment">Even for simple query builder!</li>
             </ul>
           </li>
         </ul>
       </section>
       <section>
-        <p>What the heck is going on under the hood?</p>
+        <p class="bigtext">What the heck is going on under the hood?</p>
         <br />
-        <p style="text-align: right;" class="fragment">... 14 method calls later I still don't know.</p>
+        <p style="text-align: right;" class="bigtext fragment">... 14 method calls later I still don't know.</p>
       </section>
       <section>
         <blockquote>There are two ways of constructing a software design:
@@ -853,8 +853,8 @@ interface LoggerInterface {
       </section>
       <section>
         <h2>Aphorism #7</h2>
-        <p>There is no problem that cannot be solved by adding<br />another layer of abstraction...</p>
-        <p class="fragment">except abstraction</p>
+        <p class="bigtext">There is no problem that cannot be solved by adding another layer of abstraction...</p>
+        <p class="fragment bigtext">except abstraction</p>
       </section>
     </section>
     <section>
@@ -862,19 +862,19 @@ interface LoggerInterface {
         <h1>#8</h1>
       </section>
       <section>
-        <p><del>Drupal</del>Your software has idiosyncrasies, but it's not special.</p>
+        <p class="bigtext">Your software has idiosyncrasies, but it's not special.</p>
       </section>
       <section>
-        <p>No one understands Drupalisms,<br /> except Drupal developers</p>
-        <p class="fragment">(And not even all of them)</p>
+        <p class="bigtext">No one understands Drupalisms,<br /> except Drupal developers</p>
+        <p class="fragment bigtext">(And not even all of them)</p>
       </section>
       <section>
-        <p>No one understands Symfonyisms,<br /> except Symfony developers</p>
-        <p class="fragment">(And not even all of them)</p>
+        <p class="bigtext">No one understands Symfonyisms,<br /> except Symfony developers</p>
+        <p class="fragment bigtext">(And not even all of them)</p>
       </section>
       <section>
-        <p>No one understands PHPisms,<br /> except PHP developers</p>
-        <p class="fragment">(And not even all of them)</p>
+        <p class="bigtext">No one understands PHPisms,<br /> except PHP developers</p>
+        <p class="fragment bigtext">(And not even all of them)</p>
       </section>
       <section>
         <p>No one understands your system,<br /> except you</p>
@@ -887,9 +887,9 @@ interface LoggerInterface {
       <section>
         <h2>Some numbers</h2>
         <ul>
-          <li class="fragment">Age of 3rd gen languages: 56 years</li>
-          <li class="fragment">Age of PHP: 18 years</li>
-          <li class="fragment">Age of Drupal: 12 years</li>
+          <li class="fragment">Age of 3rd gen languages: ~60 years</li>
+          <li class="fragment">Age of PHP: 22 years</li>
+          <li class="fragment">Age of Drupal: 16 years</li>
           <li class="fragment">Age of your website: 6 months</li>
         </ul>
         <p style="margin-top: 2em;" class="fragment">Odds of you doing something original...?</p>
@@ -898,17 +898,18 @@ interface LoggerInterface {
         <h2>Find existing wheels</h2>
         <ul>
           <li class="fragment">Composer / <a href="http://www.packagist.org/">Packagist.org</a></li>
-          <li class="fragment"><a href="http://www.symfony.com/">Symfony2 Components</a></li>
-          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
+          <li class="fragment"><a href="http://www.symfony.com/">Symfony Components</a></li>
+          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 3</a></li>
+          <li class="fragment">NPM, Ruby Gems, Python modules...</li>
         </ul>
       </section>
       <section>
         <h2>Use existing platforms</h2>
         <ul>
-          <li class="fragment"><a href="http://www.symfony.com/">Symfony2</a></li>
-          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework 2</a></li>
-          <li class="fragment"><a href="http://cakephp.org/">CakePHP</a></li>
-          <li class="fragment"><a href="http://drupal.org/">Drupal</a></li>
+          <li class="fragment"><a href="http://www.symfony.com/">Symfony</a></li>
+          <li class="fragment"><a href="http://framework.zend.com/">Zend Framework</a></li>
+          <li class="fragment"><a href="https://laravel.com/">Laravel</a></li>
+          <li class="fragment"><a href="https://www.drupal.org/">Drupal</a></li>
           <li class="fragment">Do not insert your from-scratch system here</li>
         </ul>
       </section>
@@ -926,26 +927,13 @@ interface LoggerInterface {
           <li class="fragment">PECL</li>
           <li class="fragment">jQuery</li>
           <li class="fragment">Wordpress(!)</li>
-          <li class="fragment">Symfony2, Zend Framework, etc.</li>
-          <li class="fragment">Java</li>
+          <li class="fragment">Symfony, Zend Framework, etc.</li>
+          <li class="fragment">Other languages!</li>
           <li class="fragment">Design patterns</li>
         </ul>
       </section>
       <section>
-        <h2>Drupal 8</h2>
-        <ul>
-          <li class="fragment">Symfony2 <small>(HttpFoundation, HttpKernel, DependencyInjection, EventDispatcher, Routing, Serializer, Validator, Yaml)</small></li>
-          <li class="fragment">Symfony CMF</li>
-          <li class="fragment">Zend Feed</li>
-          <li class="fragment">Doctrine Annotations</li>
-          <li class="fragment">Guzzle</li>
-          <li class="fragment">EasyRDF</li>
-          <li class="fragment">Assetic</li>
-          <li class="fragment">Twig</li>
-        </ul>
-      </section>
-      <section>
-        <p>Feature no software needs</p>
+        <p class="bigtext">Feature no software needs</p>
         <br />
         <h1 class="fragment">Ego</h1>
       </section>

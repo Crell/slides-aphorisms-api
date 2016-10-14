@@ -117,56 +117,105 @@
       <section>
         <h2>Asimov's Law</h2>
         <blockquote>If there are multiple universes,<br />then there are infinite universes</blockquote>
-        <p>&mdash; <em>The Gods Themselves</em></p>
+        <p>&mdash;<em>The Gods Themselves</em></p>
+        <aside class="notes">
+          <ul>
+            <li>2 is the least likely number in the universe</li>
+          </ul>
+        </aside>
       </section>
       <section>
-        <p>If there are multiple possible implementations,<br />there are infinite possible implementations</p>
+        <p class="bigtext">If there are multiple possible implementations,<br />there are infinite possible implementations</p>
       </section>
       <section>
         <h2>So what?</h2>
-        <p>Machine names > Constants</p>
+        <p class="bigtext fragment">Fixed-number assumptions</p>
       </section>
       <section>
         <pre class="font--24"><code class="php" data-trim>
-const STATUS_PUBLISHED = 1;
-const STATUS_DRAFT = 0;
-
-function load_articles_by_status($status) {
-  // Find articles $ids for $status
-  return article_load_multiple($ids);
+function engage_engine($engine_type) {
+    switch ($engine_type) {
+        case 'warp':
+            // ...
+            break;
+        case 'hyperspace':
+            // ...
+            break;
+        default:
+            throw new UnsupportedSciFiException();
+    }
 }
         </code></pre>
-      </section>
-      <section>
-        <p>Oops</p>
-        <pre class="font--24"><code class="php" data-trim>
-const MYMODULE_STATUS_PENDING = 3;
-
-const YOURMODULE_STATUS_IN_REVIEW = 3;
-        </code></pre>
+        <aside class="notes">
+          <ul>
+            <li>Add new sci-fi: Slipstream</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <pre class="font--24"><code class="php" data-trim>
-function load_articles_by_status($status = '') {
-  // Find articles $ids for $status
-  return article_load_multiple($ids);
+function engage_engine($engine_type) {
+    switch ($engine_type) {
+        case 'warp':
+            // ...
+            break;
+        case 'hyperspace':
+            // ...
+            break;
+        case 'slipstream':
+            // ...
+            break;
+        default:
+            throw new UnsupportedSciFiException();
+    }
 }
+        </code></pre>
+        <aside class="notes">
+          <ul>
+            <li>Add new sci-fi: Infinite Improbability Drive</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <pre class="font--24"><code class="php" data-trim>
+function engage_engine(Engine $engine) {
+    // ...
+    $engine->engage();
+}
+        </code></pre>
+        <aside class="notes">
+          <ul>
+            <li>Basic dependency injection, but more than that.</li>
+          </ul>
+        </aside>
+      </section>
+      <section>
+        <p>Beware constants</p>
+        <pre class="font--24"><code class="php" data-trim>
+const ENGINE_WARP = 1;
+const ENGINE_HYPERSPACE = 2;
+        </code></pre>
+        <pre class="font--24 fragment"><code class="php" data-trim>
+const ENGINE_SLIPSTREAM = 3;
+        </code></pre>
+        <pre class="font--24 fragment"><code class="php" data-trim>
+const ENGINE_INFINITE_IMPROBABILITY = 3;
         </code></pre>
       </section>
       <section>
         <h3>But aren't booleans 2-state?</h3>
-        <p class="fragment">Boolean != either/or</p>
-        <p class="fragment">Booleans don't have 2 values</p>
-        <p class="fragment">Booleans are <code>TRUE</code> or not</p>
+        <p class="fragment bigtext">Boolean != either/or</p>
+        <p class="fragment bigtext">Booleans don't have 2 values</p>
+        <p class="fragment bigtext">Booleans are <code>TRUE</code> or not</p>
       </section>
       <section>
-        <p>Access is a boolean</p>
-        <p>Access control has N-possibilities</p>
+        <p class="bigtext">Access is a boolean</p>
+        <p class="bigtext">Access control has N-possibilities</p>
       </section>
       <section>
         <h3>Garfield's Law</h3>
-        <q>One is a special case of many.</q>
-        <p>&mdash; <a href="http://groups.drupal.org/node/8001">http://groups.drupal.org/node/8001</a></p>
+        <blockquote>One is a special case of many.</blockquote>
+        <p>&mdash;<a href="http://groups.drupal.org/node/8001">http://groups.drupal.org/node/8001</a></p>
       </section>
       <section>
         <code>node_load_multiple()</code>
@@ -177,17 +226,19 @@ function load_articles_by_status($status = '') {
         <pre class="font--24"><code class="php" data-trim>
 // Fetch one node.
 function node_load($nid) {
-  $record = db_query("SELECT * FROM node WHERE nid=:nid", [':nid' => $nid])
-    ->fetchObject();
+  $query = "SELECT * FROM node WHERE nid=:nid";
+  $record = db_query($query, [':nid' => $nid])->fetchObject();
+
   $record = load_extra_stuff($record);
   return $record;
 }
         </code></pre>
-        <pre class="font--24"><code class="php" data-trim>
+        <pre class="font--24 fragment"><code class="php" data-trim>
 // Fetch multiple nodes.
 function node_load_multiple(array $nids) {
-  $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
-    ->fetchAll();
+  $query = "SELECT * from node WHERE nid IN (:nids)";
+  $records = db_query($query, [':nids' => $nids])->fetchAll();
+
   foreach ($records as $record) {
     $loaded[] = load_extra_stuff($record);
   }
@@ -197,21 +248,22 @@ function node_load_multiple(array $nids) {
       </section>
       <section>
         <h2>SELECT N + 1</h2>
-        <p class="fragment">(aka, melt your database)</p>
+        <p class="fragment bigtext">(aka, melt your database)</p>
       </section>
       <section>
         <h3>Drupal 7</h3>
         <pre class="font--24"><code class="php" data-trim>
 // Fetch one node.
 function node_load($nid) {
-  $nodes = node_load_multiple(array($nid));
+  $nodes = node_load_multiple([$nid]);
   return reset($nodes);
 }
 
 // Fetch multiple nodes.
 function node_load_multiple(array $nids) {
-  $records = db_query("SELECT * from node WHERE nid IN (:nids)", [':nids' => $nids])
-    ->fetchAll();
+  $query = "SELECT * from node WHERE nid IN (:nids)";
+  $records = db_query($query, [':nids' => $nids])->fetchAll();
+
   $records = load_extra_stuff($records);
   return $records;
 }
@@ -219,7 +271,7 @@ function node_load_multiple(array $nids) {
       </section>
       <section>
         <h2>Aphorism #1</h2>
-        <p>N is the only number</p>
+        <p class="bigtext">N is the only number</p>
       </section>
     </section>
     <section>

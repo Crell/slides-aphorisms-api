@@ -54,6 +54,10 @@
       font-style: italic;
       text-shadow: 3px 3px 10px #990000;
     }
+
+    p + p {
+      margin-top: 1em;
+    }
   </style>
 
 </head>
@@ -392,7 +396,7 @@ class InsertQuery extends Query {
       </section>
       <section>
         <h2>Aphorism #2</h2>
-        <p>Fail fast, fail cheap, fail usefully</p>
+        <p class="bigtext">Fail fast, fail cheap, fail usefully</p>
       </section>
     </section>
     <section>
@@ -400,21 +404,22 @@ class InsertQuery extends Query {
         <h1>#3</h1>
       </section>
       <section>
-        <p>You can't teach what you don't know.</p>
-        <p class="fragment" style="margin-top: 1em;">You don't know what you can't teach.</p>
+        <p class="bigtext">You can't teach what you don't know.</p>
+        <p class="fragment bigtext" style="margin-top: 1em;">You don't know what you can't teach.</p>
       </section>
       <section>
-        <p>You don't understand what you can't document.</p>
-        <p class="fragment" style="margin-top: 1em;"><em>I</em> can't understand what you don't document.</p>
+        <p class="bigtext">You don't understand what you can't document.</p>
+        <p class="fragment bigtext"><em>I</em> can't understand what you don't document.</p>
       </section>
       <section>
-        <pre class="font--24"><code class="php" data-trim>
+        <pre class="font--20"><code class="php" data-trim>
 abstract class FileTransferFTP extends FileTransfer {
    /**
     * Return an object which can implement the FTP protocol.
     *
     * @param string $jail
     * @param array $settings
+    *
     * @return FileTransferFTP
     *    The appropriate FileTransferFTP subclass based on available    
     *    options. If the FTP PHP extension is available, use it.
@@ -424,15 +429,15 @@ abstract class FileTransferFTP extends FileTransfer {
         </code></pre>
       </section>
       <section>
-        <h3>Date.module</h3>
-        <pre class="font--24"><code class="php" data-trim>
+        <h3>Date.module (Drupal 6)</h3>
+        <pre class="font--20"><code class="php" data-trim>
 /**
  * Getter callback to return date values as datestamp in UTC from the field.
  */
 function date_entity_metadata_field_getter($object, array $options,
                                            $name, $obj_type, &$context) { }
         </code></pre>
-        <p class="fragment" style="margin-top: 1em;">No, seriously, WTF?</p>
+        <p id="doc-wtf" class="fragment" data-classer="doc-wtf" data-classer-class="bigdeal" style="margin-top: 1em;">No, seriously, WTF?</p>
       </section>
       <section>
         <h2>Lack of comments indicate</h2>
@@ -455,6 +460,14 @@ function date_entity_metadata_field_getter($object, array $options,
           <li class="fragment"><em>Every</em> return value</li>
         </ul>
         <p class="fragment" style="margin-top: 1em;"><em>No</em> exceptions <span class="fragment">(Well, document those, too)</span></p>
+      </section>
+      <section>
+        <img src="assets/type-all-the-things.jpg" width="75%" alt="Type check all the things!" />
+        <aside class="notes">
+          <ul>
+            <li>Static types are documentation that can't go out of date</li>
+          </ul>
+        </aside>
       </section>
       <section>
         <h2>Usage docs</h2>
@@ -484,7 +497,7 @@ protected function normalizeCharset($value) {
       break;
     case FALSE:
       $value = iconv('Windows-1252', 'UTF-8//TRANSLIT', $value);
-      $this->log->warn("Detected Windows-1252 character encoding.");
+      $this->log->warn("Detected Windows-1252 encoding.");
       break;
     default:
       $this->log->warn("Unrecognized character encoding.");
@@ -495,7 +508,7 @@ protected function normalizeCharset($value) {
         <p class="fragment">WTF is up with UTF-8? And why is FALSE Windows-1252?</p>
       </section>
       <section>
-        <pre class="font--24"><code class="php" data-trim>
+        <pre class="font--20"><code class="php" data-trim>
 protected function normalizeCharset($value) {
   // mb_detect_encoding() in most situations supports only two character sets,
   // ASCII and UTF-8.  However, it is sadly not unusual for incoming data
@@ -510,7 +523,7 @@ protected function normalizeCharset($value) {
         </code></pre>
       </section>
       <section>
-        <pre class="font--24"><code class="php" data-trim>
+        <pre class="font--20"><code class="php" data-trim>
 switch (mb_detect_encoding($value)) {
   // I have absolutely no idea why UTF-8 strings need to be converted
   // from UTF-8 to UTF-8, but if this code is removed many strings end up
@@ -530,7 +543,7 @@ switch (mb_detect_encoding($value)) {
         </code></pre>
       </section>
       <section>
-        <pre class="font--24"><code class="php" data-trim>
+        <pre class="font--20"><code class="php" data-trim>
   // ...
 
   // A False return from mb_detect_encoding() means that it couldn't
@@ -551,7 +564,7 @@ switch (mb_detect_encoding($value)) {
       </section>
       <section>
         <h2>Aphorism #3</h2>
-        <p>Docs or it didn't happen</p>
+        <p class="bigtext">Docs or it didn't happen</p>
       </section>
     </section>
     <section>

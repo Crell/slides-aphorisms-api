@@ -109,7 +109,7 @@
       </section>
       <section>
         <h3>They're not rules</h3>
-        <img src="assets/captain-barbados.gif" width="80%" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
+        <img src="assets/captain-barbados.gif" width="70%" alt="They're more like guidelines..." data-credit="http://www.killerfilm.com/articles-2/read/captain-barbados-confirmed-for-pirates-4-14377" />
         <h3>They're more like guidelines</h3>
       </section>
       <section>
@@ -197,6 +197,7 @@ function engage_engine(Engine $engine) {
         <aside class="notes">
           <ul>
             <li>Basic dependency injection, but more than that.</li>
+            <li>Every time 1+ options, assume infinite</li>
           </ul>
         </aside>
       </section>
@@ -247,13 +248,11 @@ function node_load($nid) {
         <pre class="font--24 fragment"><code class="php" data-trim>
 // Fetch multiple nodes.
 function node_load_multiple(array $nids) {
-  $query = "SELECT * from node WHERE nid IN (:nids)";
-  $records = db_query($query, [':nids' => $nids])->fetchAll();
+  foreach ($nids as $nid) {
+    $nodes[] = node_load($nid);
+  }
 
-  foreach ($records as $record) {
-    $loaded[] = load_extra_stuff($record);
-  }
-  return $loaded;
+  return $nodes;
 }
         </code></pre>
       </section>
@@ -290,8 +289,8 @@ function node_load_multiple(array $nids) {
         <h1>#2</h1>
       </section>
       <section>
-        <q>Fail Fast, Fail Cheap, Be Lazy.</q>
-        <p>&mdash; Rasmus Lerdorf</p>
+        <p class="bigtext"><q>Fail Fast, Fail Cheap, Be Lazy.</q></p>
+        <p class="bigtext">&mdash;Rasmus Lerdorf</p>
       </section>
       <section>
         <p class="bigtext">Make the code debug for you</p>
@@ -412,6 +411,7 @@ class InsertQuery extends Query {
         <p class="fragment bigtext"><em>I</em> can't understand what you don't document.</p>
       </section>
       <section>
+        <h3>Drupal 7 (Module upload system)</h3>
         <pre class="font--20"><code class="php" data-trim>
 abstract class FileTransferFTP extends FileTransfer {
    /**
@@ -488,7 +488,7 @@ function date_entity_metadata_field_getter($object, array $options,
       <section>
         <pre class="font--24"><code class="php" data-trim>
 protected function normalizeCharset($value) {
-    switch (mb_detect_encoding($value)) {
+  switch (mb_detect_encoding($value)) {
     case 'ASCII':
       break;
     case 'UTF-8':
@@ -643,6 +643,7 @@ switch (mb_detect_encoding($value)) {
         <p class="bigtext">Don't add to API bloat</p>
       </section>
       <section>
+        <h3>Obligatory XKCD Wisdom</h3>
         <img src="assets/xkcd-standards.png" alt="There are too many APIs in the world" width="75%" data-credit="http://xkcd.com/927/" />
       </section>
       <section>
